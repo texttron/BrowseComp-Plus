@@ -1,1 +1,284 @@
-My GitHub Page
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="General-Reasoner: Advancing LLM Reasoning Across All Domains">
+    <meta property="og:title" content="General-Reasoner: Advancing LLM Reasoning Across All Domains" />
+    <meta property="og:description" content="We propose General-Reasoner, a novel training paradigm that boosts reasoning capabilities of LLMs beyond math and coding, enabling cross-domain generalization via web-crawled datasets and model-based verifiers." />
+    <meta property="og:url" content="https://tiger-ai-lab.github.io/General-Reasoner/" />
+    <meta property="og:image" content="" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
+    <title>General-Reasoner</title>
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+    <link rel="stylesheet" href="static/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="static/css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column has-text-centered">
+                        <h1 class="title is-1 publication-title">
+                            General-Reasoner: Advancing LLM Reasoning Across All Domains
+                        </h1>
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block"><sup>♥*</sup>Xueguang Ma, </span>
+                            <span class="author-block"><sup>♦*</sup>Qian Liu, </span>
+                            <span class="author-block"><sup>♥♠</sup>Dongfu Jiang, </span>
+                            <span class="author-block"><sup>♥♣</sup>Ge Zhang, </span>
+                            <span class="author-block"><sup>♦</sup>Zejun Ma, </span>
+                            <span class="author-block"><sup>♥♠</sup>Wenhu Chen</span>
+                        </div>
+
+                        <div class="column has-text-centered">
+                            <div class="publication-links">
+                                <span class="link-block">
+                                    <a href="https://github.com/TIGER-AI-Lab/General-Reasoner" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon"><i class="fab fa-github"></i></span>
+                                        <span>Code</span>
+                                    </a>
+                                </span>
+                                <span class="link-block">
+                                    <a href="https://arxiv.org/abs/2505.14652" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon"><i class="ai ai-arxiv"></i></span>
+                                        <span>Paper</span>
+                                    </a>
+                                </span>
+                                <span class="link-block">
+                                    <a href="https://huggingface.co/datasets/TIGER-Lab/WebInstruct-verified" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">🤗</span>
+                                        <span>Dataset</span>
+                                    </a>
+                                </span>
+                                <span class="link-block">
+                                    <a href="https://huggingface.co/collections/TIGER-Lab/general-reasoner-67fe9386e43e046489eac013" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                                        <span class="icon">🤗</span>
+                                        <span>Model</span>
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block">
+                                <sup>♥</sup>University of Waterloo,
+                                <sup>♠</sup>Vector Institute,
+                                <sup>♦</sup>TikTok, Singapore,
+                                <sup>♣</sup>M-A-P
+                            </span>
+                            <br>
+                            <span class="author-block">
+                                <small>
+                                    x93ma@uwaterloo.ca, wenhuchen@uwaterloo.ca
+                                </small>
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section hero is-light">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h1 class="title is-3">Abstract</h1>
+                    <div class="content has-text-justified">
+                        <p>
+                            Reinforcement learning (RL) has recently demonstrated strong potential in enhancing the reasoning capabilities of large language models (LLMs). Particularly, the "Zero" reinforcement learning introduced by Deepseek-R1-Zero enables direct RL training of base LLMs without relying on an intermediate supervised fine-tuning stage. Despite these advancements, current works for LLM reasoning mainly focus on mathematical and coding domains, largely due to data abundance and the ease of answer verification. This limits the applicability and generalization of such models to broader domains, where questions often have diverse answer representations, and data is more scarce. In this paper, we propose General-Reasoner, a novel training paradigm designed to enhance LLM reasoning capabilities across diverse domains. Our key contributions include: (1) constructing a large-scale, high-quality dataset of questions with verifiable answers curated by web crawling, covering a wide range of disciplines; and (2) developing a generative model-based answer verifier, which replaces traditional rule-based verification with the capability of chain-of-thought and context-awareness. We train a series of models and evaluate them on a wide range of datasets covering domains like physics, chemistry, finance, and electronics. Our comprehensive evaluation across 12 benchmarks (e.g. MMLU-Pro, GPQA, SuperGPQA, TheoremQA, BBEH and MATH AMC) demonstrates that General-Reasoner outperforms existing baselines, achieving robust and generalizable reasoning performance while maintaining superior effectiveness in mathematical reasoning tasks.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container is-max-desktop">
+                <div class="columns is-centered">
+                    <div class="column is-four-fifths">
+                        <div class="item">
+                            <img src="static/images/teaser.png" alt="teaser" />
+                            <p class="has-text-centered" style="font-size: 0.95rem; font-style: italic; margin-top: 0.5rem;">
+                                Figure 1: Effectiveness of our <strong>General-Reasoner</strong> trained with diverse verifiable reasoning questions using model-based verifier compared to baseline methods on various reasoning tasks.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section has-background-light">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h1 class="title is-3">General-Reasoner Training Paradigm</h1>
+                    <div class="content has-text-justified">
+                        <p>
+                            We propose a new training paradigm to broaden LLM reasoning beyond mathematics, consisting of two key components:
+                        </p>
+                        <ul>
+                            <li><strong>WebInstruct-verified:</strong> A diverse, large-scale dataset containing 230K high-quality reasoning questions across domains such as physics, chemistry, finance, and the social sciences, curated and filtered for verifiability using LLMs.</li>
+                            <li><strong>General-Verifier:</strong> A 1.5B parameter generative verifier model that enables context-aware, chain-of-thought based answer verification for a wide range of answer types, improving reward reliability during RL training.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column is-four-fifths has-text-centered">
+                    <h1 class="title is-3">Diverse Verifiable Reasoning Tasks</h1>
+                </div>
+            </div>
+            <div class="columns is-centered">
+                <div class="column is-four-fifths content has-text-justified">
+                    <p>
+                        To facilitate robust reasoning capabilities across a wide range of domains beyond mathematical problems, we construct a large-scale, diverse, and high-quality dataset composed of verifiable reasoning tasks. Our dataset-building pipeline is illustrated below.
+                    </p>
+                    <p>
+                        The initial data source is from WebInstruct, which contains around 5 million naturally occurring, web-crawled instructions from sites like StackExchange and educational portals. While useful for general instruction tuning, most entries lack verifiable answers or reasoning structure.
+                    </p>
+                    <p>
+                        We trace entries back to their original web pages to extract question-answer pairs. Questions without clearly written human answers are discarded to ensure quality. Gemini-1.5-Pro is then used to identify verifiable questions with concise answers, yielding 1M candidates. Gemini-2.0-Flash annotates metadata like answer type and difficulty. We downsample easy math entries to maintain balance.
+                    </p>
+                    <p>
+                        We further apply quality filtering by generating 8 candidate answers using Gemini-2.0-Flash:
+                    </p>
+                    <ul>
+                        <li>Remove questions where all 8 answers fail (ambiguous or noisy).</li>
+                        <li>Remove trivial questions where all 8 are correct (low difficulty).</li>
+                    </ul>
+                    <p>
+                        Finalized examples help train our model-based verifier. The resulting dataset has ~230K reasoning problems with varied answer formats and topics.
+                    </p>
+                    <div class="has-text-centered">
+                        <img src="static/images/data-pipeline.png" alt="Data Pipeline">
+                        <p style="font-size: 0.95rem; font-style: italic;">Figure 2: Data creation pipeline: It consists of QA mining, extraction, and verification.</p>
+                    </div>
+                    <div class="columns">
+                        <div class="column">
+                            <img src="static/images/answer_type.png" alt="Answer Type Distribution">
+                            <p style="font-size: 0.95rem; font-style: italic; text-align: center;">Figure 3: Answer Type Distribution</p>
+                        </div>
+                        <div class="column">
+                            <img src="static/images/domain_pie.png" alt="Domain Distribution">
+                            <p style="font-size: 0.95rem; font-style: italic; text-align: center;">Figure 4: Domain Distribution</p>
+                        </div>
+                    </div>
+                    <p>
+                        The dataset covers multiple fields such as mathematics, physics, chemistry, finance, and humanities. This rigorous process ensures the dataset is reliable, verifiable, and diverse, enabling the training of generalizable reasoning LLMs.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="section has-background-light">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column is-four-fifths has-text-centered">
+                    <h1 class="title is-3">Generative Model-Based Verifier</h1>
+                </div>
+            </div>
+            <div class="columns is-centered">
+                <div class="column is-four-fifths content has-text-justified">
+                    <p>
+                        Traditional rule-based verifiers, commonly used for mathematical reasoning, rely on rigid matching or symbolic comparison to determine correctness. While efficient for math tasks, they face major limitations in broader reasoning:
+                    </p>
+                    <ul>
+                        <li><strong>Rigid Matching Criteria:</strong> They struggle to recognize semantically equivalent answers expressed differently.</li>
+                        <li><strong>Semantic Insensitivity:</strong> They cannot interpret varied but valid formats (e.g., different units or synonyms).</li>
+                        <li><strong>Lack of Generality:</strong> Adapting them to diverse domains like finance, chemistry, or humanities is impractical.</li>
+                    </ul>
+                    <p>
+                        To overcome these challenges, we develop a compact <strong>generative model-based verifier</strong> trained to determine answer equivalence in a chain-of-thought format. Rather than relying on expensive LLMs like Gemini-2.0, our verifier is a 1.5B-parameter model fine-tuned from Qwen2.5-Math-1.5B using our curated dataset.
+                    </p>
+                    <p>
+                        The verifier takes in the question, reference answer, and student-generated answer, and generates a reasoning trace followed by a binary true/false verdict. This provides accurate, interpretable reward signals for reinforcement learning.
+                    </p>
+                    <p>
+                        Our model-based verifier demonstrates strong alignment with Gemini-2.0-Flash and significantly outperforms traditional rule-based methods in robustness and generality.
+                    </p>
+                    <div class="has-text-centered">
+                        <img src="static/images/verifier.png" alt="Verifier Comparison">
+                        <p style="font-size: 0.95rem; font-style: italic;">Figure 5: Comparison between traditional rule-based and our generative model-based verifier across domains.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column is-four-fifths has-text-centered">
+                    <h1 class="title is-3">Results on Reasoning Benchmarks</h1>
+                </div>
+            </div>
+            <div class="columns is-centered">
+                <div class="column is-four-fifths content has-text-justified">
+                    <p>
+                        We evaluate <strong>General-Reasoner</strong> across a variety of reasoning tasks. Our model, trained using Zero RL, consistently outperforms both base and supervised models initialized from Qwen2.5 and Qwen3 backbones.
+                    </p>
+                    <p>
+                        For example, with Qwen2.5-7B-Base, General-Reasoner achieves 58.9% on MMLU-Pro, surpassing both the base (47.7%) and instructed (57.0%) models. With the Qwen2.5-14B backbone, performance further improves, reaching 66.6% on MMLU-Pro.
+                    </p>
+                    <p>
+                        Our approach also demonstrates strong results in math-related tasks across both 7B and 14B scales. Compared to reinforcement learning methods such as SimpleRL and Nemotraon-CrossThink, General-Reasoner leads on benchmarks including GPQA, SuperGPQA, and BBEH.
+                    </p>
+                    <p>
+                        The Qwen3 backbone provides additional improvements: General-Reasoner-4B achieves 62.8% on MMLU-Pro, outperforming the 7B Qwen2.5 variant. Our best model, General-Reasoner-Qwen3-14B, reaches 56.1% on GPQA and 54.4% on TheoremQA, comparable to closed-source models like GPT-4o.
+                    </p>
+                    <p>
+                        While a gap remains on some benchmarks versus commercial systems, our results highlight the promise of Zero RL when paired with diverse reasoning data and compact model-based reward verifiers.
+                    </p>
+                    <div class="has-text-centered">
+                        <img src="static/images/results_general.png" alt="General Reasoning Results">
+                        <p style="font-size: 0.95rem; font-style: italic;">Table 1: Accuracy comparison of our <strong>General-Reasoner</strong> with baseline methods on general reasoning benchmarks.</p>
+                    </div>
+                    <div class="has-text-centered" style="margin-top: 2rem;">
+                        <img src="static/images/results_math.png" alt="Math Benchmark Results">
+                        <p style="font-size: 0.95rem; font-style: italic;">Table 2: Accuracy comparison across math-related benchmarks.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section has-background-light">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column is-four-fifths content">
+                    <h2 class="title is-3">Citation</h2>
+                    <p>Please cite our work if you find it helpful:</p>
+                    <pre><code>@article{general-reasoner,
+                        title={{G}eneral-{R}easoner: Advancing {LLM} Reasoning Across All Domains}, 
+                        author={Xueguang Ma and Qian Liu and Dongfu Jiang and Ge Zhang and Zejun Ma and Wenhu Chen},
+                        year={2025},
+                        journal={arXiv:2505.14652},
+                        url={https://arxiv.org/abs/2505.14652}, 
+                  }</code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+</body>
+</html>
