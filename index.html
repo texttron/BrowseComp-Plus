@@ -57,22 +57,10 @@
                             <span class="author-block">Jimmy Lin<sup>1</sup></span>
                         </div>
 
-                        <div class="is-size-5 publication-authors" style="margin-top: 0.5rem;">
-                            <span class="author-block"><small><sup>1</sup>University of Waterloo</small></span>
-                            <span class="author-block"><small><sup>2</sup>CSIRO</small></span>
-                            <span class="author-block"><small><sup>3</sup>Independent</small></span>
-                            <span class="author-block"><small><sup>4</sup>Carnegie Mellon University</small></span>
-                            <span class="author-block"><small><sup>5</sup>The University of Queensland</small></span>
-                        </div>
-
-                        <div class="is-size-5 publication-authors" style="margin-top: 0.25rem; margin-bottom: 0;">
-                            <span class="author-block">s42chen@uwaterloo.ca, x93ma@uwaterloo.ca</span>
-                        </div>
-
-                        <div class="column has-text-centered" style="margin-top: 0.5rem;">
+                        <div class="column has-text-centered" style="margin-top: 0rem; margin-bottom: 0rem;">
                             <div class="publication-links" style="display: inline-flex; gap: 1.25rem; flex-wrap: wrap;">
                                 <span class="link-block">
-                                    <a href="#" target="https://github.com/texttron/BrowseComp-Plus" class="external-link button is-normal is-rounded is-dark">
+                                    <a href="https://github.com/texttron/BrowseComp-Plus" target="_blank" class="external-link button is-normal is-rounded is-dark">
                                         <span class="icon"><i class="fab fa-github"></i></span>
                                         <span>Code</span>
                                     </a>
@@ -84,13 +72,27 @@
                                     </a>
                                 </span>
                                 <span class="link-block">
-                                    <a href="#" target="https://huggingface.co/datasets/Tevatron/browsecomp-plus" class="external-link button is-normal is-rounded is-dark">
+                                    <a href="https://huggingface.co/datasets/Tevatron/browsecomp-plus" target="_blank" class="external-link button is-normal is-rounded is-dark">
                                         <span class="icon">🤗</span>
                                         <span>Dataset</span>
                                     </a>
                                 </span>
                             </div>
                         </div>
+
+                        <div class="is-size-5 publication-authors" style="margin-top: 0rem;">
+                            <span class="author-block"><small><sup>1</sup>University of Waterloo</small></span>
+                            <span class="author-block"><small><sup>2</sup>CSIRO</small></span>
+                            <span class="author-block"><small><sup>3</sup>Independent</small></span>
+                            <span class="author-block"><small><sup>4</sup>Carnegie Mellon University</small></span>
+                            <span class="author-block"><small><sup>5</sup>The University of Queensland</small></span>
+                        </div>
+
+                        <div class="is-size-5 publication-authors" style="margin-top: 0rem; margin-bottom: 1.5rem;">
+                            <span class="author-block">s42chen@uwaterloo.ca, x93ma@uwaterloo.ca</span>
+                        </div>
+
+                        
 
                         
 
@@ -100,16 +102,32 @@
         </div>
     </section>
 
+    <!-- Abstract -->
+    <section class="section has-background-light" style="padding-top: 3rem; padding-bottom: 3rem;">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h1 class="title is-3">Abstract</h1>
+                </div>
+                    </div>
+            <div class="columns is-centered">
+                <div class="column is-four-fifths content has-text-justified">
+                    <p><strong>Deep-Research</strong> agents, which integrate large language models (LLMs) with search tools, have shown success in improving the effectiveness of handling complex queries that require iterative search planning and reasoning over search results. Evaluations on current benchmarks like BrowseComp rely on black-box live web search APIs, with notable limitations in (1) <strong><em>fairness</em></strong>: dynamic and opaque web APIs hinder fair comparisons and reproducibility of deep research methods; (2) <strong><em>transparency</em></strong>: lack of control over the document corpus makes it difficult to isolate retriever contributions. In other words, the current evaluations may compare a complete deep research system at a given time, but they do not foster well-controlled experiments to provide insights into the capability of underlying deep research LLMs. To address these challenges, we introduce BrowseComp-Plus, a benchmark derived from BrowseComp, employing a fixed, carefully curated corpus. Each query in BrowseComp-Plus includes human-verified supporting documents and mined challenging negatives, enabling controlled experimentation. The benchmark is shown to be effective in distinguishing the performance of deep research systems. For instance, the open-source model Search-R1, when paired with the BM25 retriever, achieves 3.86% accuracy, whereas the GPT-5 achieves 55.9%. Integrating the GPT-5 with the Qwen3-Embedding-8B retriever further enhances its accuracy to 70.1% with fewer search calls. This benchmark allows comprehensive evaluation and disentangled analysis of deep research agents and retrieval methods, fostering insights into retrieval effectiveness, citation accuracy, and context engineering in Deep-Research systems.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Hero Figure (optional) -->
     <section class="hero is-small" style="margin-top: 0;">
-        <div class="hero-body" style="padding-top: 0; padding-bottom: 0;">
+        <div class="hero-body" style="padding-top: 1.5rem; padding-bottom: 3rem;">
             <div class="container is-max-desktop">
                 <div class="columns is-centered">
                     <div class="column is-four-fifths">
                         <div class="item">
                             <img src="static/images/teaser.png" alt="Teaser" />
                             <p class="has-text-centered" style="font-size: 0.95rem; font-style: italic; margin-top: 0.5rem;">
-                                Accuracy vs. number of search calls for Deep-Research agents with different retrievers.<br/>
+                                Teaser: Accuracy vs. number of search calls for Deep-Research agents with different retrievers.<br/>
                                 The figure shows that <strong>Deep-Research agents mostly improve the final accuracy at a cost of more search calls</strong>, whereas better retrieval systems not only improve the overall accuracy but also reduce the number of search calls. That is, <strong>better retrievers lead to both efficiency and effectiveness.</strong>
                             </p>
                         </div>
@@ -118,29 +136,7 @@
             </div>
         </div>
     </section>
-
-    <!-- What is this? -->
-    <section class="section" style="padding-top: 1.5rem;">
-        <div class="container is-max-desktop">
-            <div class="columns is-centered has-text-centered">
-                <div class="column is-four-fifths">
-                    <h1 class="title is-3">What is this?</h1>
-                </div>
-            </div>
-            <div class="columns is-centered">
-                <div class="column is-four-fifths content has-text-justified">
-                    <p>
-                        <strong>Deep-Research</strong> agents, which integrate large language models (LLMs) with search tools, have shown success in improving the effectiveness of handling complex queries that require iterative search planning and reasoning over search results.
-                    </p>
-                    <p>
-                        BrowseComp-Plus is the first benchmark for evaluating <strong>retrieval-agent interactions</strong> in Deep-Research, isolating the effect of the retriever and the LLM agent to enable <strong>fair, transparent comparisons of Deep-Research agents</strong>. The benchmark sources challenging, reasoning-intensive queries from OpenAI's
-                        <a href="https://openai.com/index/browsecomp" target="_blank">BrowseComp</a>. However, instead of searching the live web, BrowseComp-Plus evaluates against a fixed, curated corpus of ~100K web documents from the web. The corpus includes both human-verified evidence documents sufficient to answer the queries, and mined hard negatives to keep the task challenging.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    
     <section class="section has-background-light">
         <div class="container is-max-desktop">
             <div class="columns is-centered has-text-centered">
@@ -156,7 +152,7 @@
                         <li><strong>Web search APIs lack transparency</strong>. Black-box web search APIs add to the complexity of the moving target; they vary in retrieval algorithms and indexed content overtime, hindering apples-to-apples comparisons across time, even when using the same API.</li>
                     </ol>
                     <p>
-                        A fixed corpus gives complete control over the retrieval process used by Deep-Research agents, <strong>isolating the effect of the retriever</strong>. This not only enables fair, reproducible evaluations in the same retrieval setting, but also allows us to systematically compare the effects of different retrievers paired with the same LLM agent, answering the question:
+                        With a fixed corpus, BrowseComp-Plus has complete control over the retrieval process used by Deep-Research agents, <strong>isolating the effect of the retriever</strong>. This not only enables fair, reproducible evaluations in the same retrieval setting, but also allows us to systematically compare the effects of different retrievers paired with the same LLM agent, answering the question:
                     </p>
                     <p style="text-align: center; margin: 1.5rem 0;">
                         <span style="background-color: #ffcdd2; padding: 8px 16px; border-radius: 8px; font-size: 1.2em; font-weight: bold; display: inline-block;">"How much does the retriever matter in Deep-Research?"</span>
