@@ -2,83 +2,97 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <meta name="description" content="General-Reasoner: Advancing LLM Reasoning Across All Domains">
-    <meta property="og:title" content="General-Reasoner: Advancing LLM Reasoning Across All Domains" />
-    <meta property="og:description" content="We propose General-Reasoner, a novel training paradigm that boosts reasoning capabilities of LLMs beyond math and coding, enabling cross-domain generalization via web-crawled datasets and model-based verifiers." />
-    <meta property="og:url" content="https://tiger-ai-lab.github.io/General-Reasoner/" />
-    <meta property="og:image" content="" />
+    <meta name="description" content="BrowseComp-Plus: A More Fair and Transparent Evaluation Benchmark of Deep-Research Agent">
+    <meta property="og:title" content="BrowseComp-Plus: A More Fair and Transparent Evaluation Benchmark of Deep-Research Agent" />
+    <meta property="og:description" content="BrowseComp-Plus is the first benchmark for evaluating retrieval–agent interactions in Deep-Research, isolating the effect of the retriever and the LLM agent to enable fair, transparent comparisons of Deep-Research agents." />
+    <meta property="og:url" content="https://texttron.github.io/BrowseComp-Plus/" />
+    <meta property="og:image" content="static/images/teaser.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
 
-    <title>General-Reasoner</title>
+    <title>BrowseComp-Plus</title>
     <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
     <link rel="stylesheet" href="static/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="static/css/jquery.dataTables.css">
     <link rel="stylesheet" href="static/css/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 </head>
 
 <body>
     <section class="hero">
-        <div class="hero-body">
+        <div class="hero-body" style="padding-bottom: 0;">
             <div class="container is-max-desktop">
                 <div class="columns is-centered">
                     <div class="column has-text-centered">
                         <h1 class="title is-1 publication-title">
-                            General-Reasoner: Advancing LLM Reasoning Across All Domains
+                            BrowseComp-Plus: A More Fair and Transparent Evaluation Benchmark of Deep-Research Agent
                         </h1>
                         <div class="is-size-5 publication-authors">
-                            <span class="author-block"><sup>♥*</sup>Xueguang Ma, </span>
-                            <span class="author-block"><sup>♦*</sup>Qian Liu, </span>
-                            <span class="author-block"><sup>♥♠</sup>Dongfu Jiang, </span>
-                            <span class="author-block"><sup>♥♣</sup>Ge Zhang, </span>
-                            <span class="author-block"><sup>♦</sup>Zejun Ma, </span>
-                            <span class="author-block"><sup>♥♠</sup>Wenhu Chen</span>
+                            <span class="author-block">Zijian Chen<sup>1</sup>*</span>,
+                            <span class="author-block">Xueguang Ma<sup>1</sup>*</span>,
+                            <span class="author-block">Shengyao Zhuang<sup>2,5</sup>*</span>,
+                            <span class="author-block">Ping Nie<sup>3</sup></span>,
+                            <span class="author-block">Kai Zou<sup>3</sup></span>
+                        </div>
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block">Andrew Liu<sup>1</sup></span>,
+                            <span class="author-block">Joshua Green<sup>1</sup></span>,
+                            <span class="author-block">Kshama Patel<sup>1</sup></span>,
+                            <span class="author-block">Ruoxi Meng<sup>1</sup></span>,
+                            <span class="author-block">Mingyi Su<sup>1</sup></span>
+                        </div>
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block">Sahel Sharifymoghaddam<sup>1</sup></span>,
+                            <span class="author-block">Yanxi Li<sup>1</sup></span>,
+                            <span class="author-block">Haoran Hong<sup>1</sup></span>,
+                            <span class="author-block">Xinyu Shi<sup>1</sup></span>,
+                            <span class="author-block">Xuye Liu<sup>1</sup></span>
+                        </div>
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block">Nandan Thakur<sup>1</sup></span>,
+                            <span class="author-block">Crystina Zhang<sup>1</sup></span>,
+                            <span class="author-block">Luyu Gao<sup>4</sup></span>,
+                            <span class="author-block">Wenhu Chen<sup>1</sup></span>,
+                            <span class="author-block">Jimmy Lin<sup>1</sup></span>
                         </div>
 
-                        <div class="column has-text-centered">
-                            <div class="publication-links">
+                        <div class="is-size-5 publication-authors" style="margin-top: 0.5rem;">
+                            <span class="author-block"><small><sup>1</sup>University of Waterloo</small></span>
+                            <span class="author-block"><small><sup>2</sup>CSIRO</small></span>
+                            <span class="author-block"><small><sup>3</sup>Independent</small></span>
+                            <span class="author-block"><small><sup>4</sup>Carnegie Mellon University</small></span>
+                            <span class="author-block"><small><sup>5</sup>The University of Queensland</small></span>
+                        </div>
+
+                        <div class="is-size-5 publication-authors" style="margin-top: 0.25rem; margin-bottom: 0;">
+                            <span class="author-block">s42chen@uwaterloo.ca, x93ma@uwaterloo.ca</span>
+                        </div>
+
+                        <div class="column has-text-centered" style="margin-top: 0.5rem;">
+                            <div class="publication-links" style="display: inline-flex; gap: 1.25rem; flex-wrap: wrap;">
                                 <span class="link-block">
-                                    <a href="https://github.com/TIGER-AI-Lab/General-Reasoner" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                                    <a href="#" target="https://github.com/texttron/BrowseComp-Plus" class="external-link button is-normal is-rounded is-dark">
                                         <span class="icon"><i class="fab fa-github"></i></span>
                                         <span>Code</span>
                                     </a>
                                 </span>
                                 <span class="link-block">
-                                    <a href="https://arxiv.org/abs/2505.14652" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                                    <a href="https://texttron.github.io/BrowseComp-Plus/" target="_blank" class="external-link button is-normal is-rounded is-dark">
                                         <span class="icon"><i class="ai ai-arxiv"></i></span>
                                         <span>Paper</span>
                                     </a>
                                 </span>
                                 <span class="link-block">
-                                    <a href="https://huggingface.co/datasets/TIGER-Lab/WebInstruct-verified" target="_blank" class="external-link button is-normal is-rounded is-dark">
+                                    <a href="#" target="https://huggingface.co/datasets/Tevatron/browsecomp-plus" class="external-link button is-normal is-rounded is-dark">
                                         <span class="icon">🤗</span>
                                         <span>Dataset</span>
-                                    </a>
-                                </span>
-                                <span class="link-block">
-                                    <a href="https://huggingface.co/collections/TIGER-Lab/general-reasoner-67fe9386e43e046489eac013" target="_blank" class="external-link button is-normal is-rounded is-dark">
-                                        <span class="icon">🤗</span>
-                                        <span>Model</span>
                                     </a>
                                 </span>
                             </div>
                         </div>
 
-                        <div class="is-size-5 publication-authors">
-                            <span class="author-block">
-                                <sup>♥</sup>University of Waterloo,
-                                <sup>♠</sup>Vector Institute,
-                                <sup>♦</sup>TikTok, Singapore,
-                                <sup>♣</sup>M-A-P
-                            </span>
-                            <br>
-                            <span class="author-block">
-                                <small>
-                                    x93ma@uwaterloo.ca, wenhuchen@uwaterloo.ca
-                                </small>
-                            </span>
-                        </div>
+                        
 
                     </div>
                 </div>
@@ -86,30 +100,17 @@
         </div>
     </section>
 
-    <section class="section hero is-light">
-        <div class="container is-max-desktop">
-            <div class="columns is-centered has-text-centered">
-                <div class="column is-four-fifths">
-                    <h1 class="title is-3">Abstract</h1>
-                    <div class="content has-text-justified">
-                        <p>
-                            Reinforcement learning (RL) has recently demonstrated strong potential in enhancing the reasoning capabilities of large language models (LLMs). Particularly, the "Zero" reinforcement learning introduced by Deepseek-R1-Zero enables direct RL training of base LLMs without relying on an intermediate supervised fine-tuning stage. Despite these advancements, current works for LLM reasoning mainly focus on mathematical and coding domains, largely due to data abundance and the ease of answer verification. This limits the applicability and generalization of such models to broader domains, where questions often have diverse answer representations, and data is more scarce. In this paper, we propose General-Reasoner, a novel training paradigm designed to enhance LLM reasoning capabilities across diverse domains. Our key contributions include: (1) constructing a large-scale, high-quality dataset of questions with verifiable answers curated by web crawling, covering a wide range of disciplines; and (2) developing a generative model-based answer verifier, which replaces traditional rule-based verification with the capability of chain-of-thought and context-awareness. We train a series of models and evaluate them on a wide range of datasets covering domains like physics, chemistry, finance, and electronics. Our comprehensive evaluation across 12 benchmarks (e.g. MMLU-Pro, GPQA, SuperGPQA, TheoremQA, BBEH and MATH AMC) demonstrates that General-Reasoner outperforms existing baselines, achieving robust and generalizable reasoning performance while maintaining superior effectiveness in mathematical reasoning tasks.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="hero">
-        <div class="hero-body">
+    <!-- Hero Figure (optional) -->
+    <section class="hero is-small" style="margin-top: 0;">
+        <div class="hero-body" style="padding-top: 0; padding-bottom: 0;">
             <div class="container is-max-desktop">
                 <div class="columns is-centered">
                     <div class="column is-four-fifths">
                         <div class="item">
-                            <img src="static/images/teaser.png" alt="teaser" />
+                            <img src="static/images/teaser.png" alt="Teaser" />
                             <p class="has-text-centered" style="font-size: 0.95rem; font-style: italic; margin-top: 0.5rem;">
-                                Figure 1: Effectiveness of our <strong>General-Reasoner</strong> trained with diverse verifiable reasoning questions using model-based verifier compared to baseline methods on various reasoning tasks.
+                                Accuracy vs. number of search calls for Deep-Research agents with different retrievers.<br/>
+                                The figure shows that <strong>Deep-Research agents mostly improve the final accuracy at a cost of more search calls</strong>, whereas better retrieval systems not only improve the overall accuracy but also reduce the number of search calls. That is, <strong>better retrievers lead to both efficiency and effectiveness.</strong>
                             </p>
                         </div>
                     </div>
@@ -118,142 +119,93 @@
         </div>
     </section>
 
+    <!-- What is this? -->
+    <section class="section" style="padding-top: 1.5rem;">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h1 class="title is-3">What is this?</h1>
+                </div>
+            </div>
+            <div class="columns is-centered">
+                <div class="column is-four-fifths content has-text-justified">
+                    <p>
+                        <strong>Deep-Research</strong> agents, which integrate large language models (LLMs) with search tools, have shown success in improving the effectiveness of handling complex queries that require iterative search planning and reasoning over search results.
+                    </p>
+                    <p>
+                        BrowseComp-Plus is the first benchmark for evaluating <strong>retrieval-agent interactions</strong> in Deep-Research, isolating the effect of the retriever and the LLM agent to enable <strong>fair, transparent comparisons of Deep-Research agents</strong>. The benchmark sources challenging, reasoning-intensive queries from OpenAI's
+                        <a href="https://openai.com/index/browsecomp" target="_blank">BrowseComp</a>. However, instead of searching the live web, BrowseComp-Plus evaluates against a fixed, curated corpus of ~100K web documents from the web. The corpus includes both human-verified evidence documents sufficient to answer the queries, and mined hard negatives to keep the task challenging.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section class="section has-background-light">
         <div class="container is-max-desktop">
             <div class="columns is-centered has-text-centered">
                 <div class="column is-four-fifths">
-                    <h1 class="title is-3">General-Reasoner Training Paradigm</h1>
-                    <div class="content has-text-justified">
-                        <p>
-                            We propose a new training paradigm to broaden LLM reasoning beyond mathematics, consisting of two key components:
-                        </p>
-                        <ul>
-                            <li><strong>WebInstruct-verified:</strong> A diverse, large-scale dataset containing 230K high-quality reasoning questions across domains such as physics, chemistry, finance, and the social sciences, curated and filtered for verifiability using LLMs.</li>
-                            <li><strong>General-Verifier:</strong> A 1.5B parameter generative verifier model that enables context-aware, chain-of-thought based answer verification for a wide range of answer types, improving reward reliability during RL training.</li>
-                        </ul>
-                    </div>
+                    <h1 class="title is-3">Why a new benchmark?</h1>
+                </div>
+            </div>
+            <div class="columns is-centered">
+                <div class="column is-four-fifths content has-text-justified">
+                    <p>Existing benchmarks for Deep-Research agents consist of question-answer pairs, and require agents to answer them using live web search APIs in real time. This setup introduces major fairness and reproducibility issues:</p>
+                    <ol>
+                        <li><strong>The internet is a moving target</strong>. The web constantly changes; thus, a system evaluated today on the web may be able to answer different queries evaluated tomorrow. This is especially crucial in the presence of data leakage (e.g., public releases of query-answer pairs on Hugging Face), which renders evaluations meaningless if agents see leaked data.</li>
+                        <li><strong>Web search APIs lack transparency</strong>. Black-box web search APIs add to the complexity of the moving target; they vary in retrieval algorithms and indexed content overtime, hindering apples-to-apples comparisons across time, even when using the same API.</li>
+                    </ol>
+                    <p>
+                        A fixed corpus gives complete control over the retrieval process used by Deep-Research agents, <strong>isolating the effect of the retriever</strong>. This not only enables fair, reproducible evaluations in the same retrieval setting, but also allows us to systematically compare the effects of different retrievers paired with the same LLM agent, answering the question:
+                    </p>
+                    <p style="text-align: center; margin: 1.5rem 0;">
+                        <span style="background-color: #ffcdd2; padding: 8px 16px; border-radius: 8px; font-size: 1.2em; font-weight: bold; display: inline-block;">"How much does the retriever matter in Deep-Research?"</span>
+                    </p>
                 </div>
             </div>
         </div>
     </section>
+
+
+
+    
 
     <section class="section">
         <div class="container is-max-desktop">
-            <div class="columns is-centered">
-                <div class="column is-four-fifths has-text-centered">
-                    <h1 class="title is-3">Diverse Verifiable Reasoning Tasks</h1>
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h1 class="title is-3">Dataset Construction</h1>
                 </div>
             </div>
             <div class="columns is-centered">
                 <div class="column is-four-fifths content has-text-justified">
                     <p>
-                        To facilitate robust reasoning capabilities across a wide range of domains beyond mathematical problems, we construct a large-scale, diverse, and high-quality dataset composed of verifiable reasoning tasks. Our dataset-building pipeline is illustrated below.
+                        BrowseComp-Plus contains 830 queries sourced from <a href="https://openai.com/index/browsecomp" target="_blank">BrowseComp</a>, each of which could take a human more than 2 hours to answer using a search engine. We carefully construct a corpus of ~100K web documents for these queries, designed to meet three criteria:
                     </p>
+                    <ol>
+                        <li><strong>Comprehensive Coverage</strong>: The corpus provides complete evidence to support the entire reasoning chain required to answer each question.</li>
+                        <li><strong>Clear Differentiation of Effectiveness</strong>: The corpus contains sufficiently distracting hard negatives to maintain difficulty, capable of distinguishing the effectiveness of various strong Deep-Research agents.</li>
+                        <li><strong>Practical Size</strong>: At a size of 100K, the corpus is large enough to yield reliable research insights, while being computationally reasonable for research purposes.</li>
+                    </ol>
                     <p>
-                        The initial data source is from WebInstruct, which contains around 5 million naturally occurring, web-crawled instructions from sites like StackExchange and educational portals. While useful for general instruction tuning, most entries lack verifiable answers or reasoning structure.
+                        For each query, we collect the evidence documents in a two-stage process: (1) OpenAI's o3 retrieves candidate evidence documents from the web using the ground-truth question&ndash;answer pairs; (2) Human annotators verify the candidates and add missing documents to ensure the corpus contains all evidence needed to fully answer each query.
                     </p>
+                    <div class="has-text-centered" style="margin-bottom: 1rem;">
+                        <img src="static/images/positive_collection.png" alt="positive collection" />
+                        <p style="font-size: 0.95rem; font-style: italic; margin-top: 0.5rem;">Positive collection pipeline; o3 searches initial candidates, enhanced by human annotators</p>
+                    </div>
                     <p>
-                        We trace entries back to their original web pages to extract question-answer pairs. Questions without clearly written human answers are discarded to ensure quality. Gemini-1.5-Pro is then used to identify verifiable questions with concise answers, yielding 1M candidates. Gemini-2.0-Flash annotates metadata like answer type and difficulty. We downsample easy math entries to maintain balance.
+                        In addition to <strong>evidence</strong> documents, annotators also label the documents that <em>semantically</em> contain the final answer, designated as <strong>gold</strong> documents. These labels are later used to perform retriever-only evaluation.
                     </p>
+                    <blockquote>
+                        For example, a query might ask for the number of publications by an author, with the ground-truth answer being "7". A gold document could be the author's personal webpage listing their publications; while it may not contain the string "7" explicitly, it semantically contains the answer.
+                    </blockquote>
                     <p>
-                        We further apply quality filtering by generating 8 candidate answers using Gemini-2.0-Flash:
-                    </p>
-                    <ul>
-                        <li>Remove questions where all 8 answers fail (ambiguous or noisy).</li>
-                        <li>Remove trivial questions where all 8 are correct (low difficulty).</li>
-                    </ul>
-                    <p>
-                        Finalized examples help train our model-based verifier. The resulting dataset has ~230K reasoning problems with varied answer formats and topics.
+                        For the negative collection, we take each query from BrowseComp, and prompt GPT-4o to decompose the query into simpler, self-contained sub-queries. For each sub-query, we use a Google Search API provider to search the web, and scrape the results as hard negatives.
                     </p>
                     <div class="has-text-centered">
-                        <img src="static/images/data-pipeline.png" alt="Data Pipeline">
-                        <p style="font-size: 0.95rem; font-style: italic;">Figure 2: Data creation pipeline: It consists of QA mining, extraction, and verification.</p>
-                    </div>
-                    <div class="columns">
-                        <div class="column">
-                            <img src="static/images/answer_type.png" alt="Answer Type Distribution">
-                            <p style="font-size: 0.95rem; font-style: italic; text-align: center;">Figure 3: Answer Type Distribution</p>
-                        </div>
-                        <div class="column">
-                            <img src="static/images/domain_pie.png" alt="Domain Distribution">
-                            <p style="font-size: 0.95rem; font-style: italic; text-align: center;">Figure 4: Domain Distribution</p>
-                        </div>
-                    </div>
-                    <p>
-                        The dataset covers multiple fields such as mathematics, physics, chemistry, finance, and humanities. This rigorous process ensures the dataset is reliable, verifiable, and diverse, enabling the training of generalizable reasoning LLMs.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <section class="section has-background-light">
-        <div class="container is-max-desktop">
-            <div class="columns is-centered">
-                <div class="column is-four-fifths has-text-centered">
-                    <h1 class="title is-3">Generative Model-Based Verifier</h1>
-                </div>
-            </div>
-            <div class="columns is-centered">
-                <div class="column is-four-fifths content has-text-justified">
-                    <p>
-                        Traditional rule-based verifiers, commonly used for mathematical reasoning, rely on rigid matching or symbolic comparison to determine correctness. While efficient for math tasks, they face major limitations in broader reasoning:
-                    </p>
-                    <ul>
-                        <li><strong>Rigid Matching Criteria:</strong> They struggle to recognize semantically equivalent answers expressed differently.</li>
-                        <li><strong>Semantic Insensitivity:</strong> They cannot interpret varied but valid formats (e.g., different units or synonyms).</li>
-                        <li><strong>Lack of Generality:</strong> Adapting them to diverse domains like finance, chemistry, or humanities is impractical.</li>
-                    </ul>
-                    <p>
-                        To overcome these challenges, we develop a compact <strong>generative model-based verifier</strong> trained to determine answer equivalence in a chain-of-thought format. Rather than relying on expensive LLMs like Gemini-2.0, our verifier is a 1.5B-parameter model fine-tuned from Qwen2.5-Math-1.5B using our curated dataset.
-                    </p>
-                    <p>
-                        The verifier takes in the question, reference answer, and student-generated answer, and generates a reasoning trace followed by a binary true/false verdict. This provides accurate, interpretable reward signals for reinforcement learning.
-                    </p>
-                    <p>
-                        Our model-based verifier demonstrates strong alignment with Gemini-2.0-Flash and significantly outperforms traditional rule-based methods in robustness and generality.
-                    </p>
-                    <div class="has-text-centered">
-                        <img src="static/images/verifier.png" alt="Verifier Comparison">
-                        <p style="font-size: 0.95rem; font-style: italic;">Figure 5: Comparison between traditional rule-based and our generative model-based verifier across domains.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section">
-        <div class="container is-max-desktop">
-            <div class="columns is-centered">
-                <div class="column is-four-fifths has-text-centered">
-                    <h1 class="title is-3">Results on Reasoning Benchmarks</h1>
-                </div>
-            </div>
-            <div class="columns is-centered">
-                <div class="column is-four-fifths content has-text-justified">
-                    <p>
-                        We evaluate <strong>General-Reasoner</strong> across a variety of reasoning tasks. Our model, trained using Zero RL, consistently outperforms both base and supervised models initialized from Qwen2.5 and Qwen3 backbones.
-                    </p>
-                    <p>
-                        For example, with Qwen2.5-7B-Base, General-Reasoner achieves 58.9% on MMLU-Pro, surpassing both the base (47.7%) and instructed (57.0%) models. With the Qwen2.5-14B backbone, performance further improves, reaching 66.6% on MMLU-Pro.
-                    </p>
-                    <p>
-                        Our approach also demonstrates strong results in math-related tasks across both 7B and 14B scales. Compared to reinforcement learning methods such as SimpleRL and Nemotraon-CrossThink, General-Reasoner leads on benchmarks including GPQA, SuperGPQA, and BBEH.
-                    </p>
-                    <p>
-                        The Qwen3 backbone provides additional improvements: General-Reasoner-4B achieves 62.8% on MMLU-Pro, outperforming the 7B Qwen2.5 variant. Our best model, General-Reasoner-Qwen3-14B, reaches 56.1% on GPQA and 54.4% on TheoremQA, comparable to closed-source models like GPT-4o.
-                    </p>
-                    <p>
-                        While a gap remains on some benchmarks versus commercial systems, our results highlight the promise of Zero RL when paired with diverse reasoning data and compact model-based reward verifiers.
-                    </p>
-                    <div class="has-text-centered">
-                        <img src="static/images/results_general.png" alt="General Reasoning Results">
-                        <p style="font-size: 0.95rem; font-style: italic;">Table 1: Accuracy comparison of our <strong>General-Reasoner</strong> with baseline methods on general reasoning benchmarks.</p>
-                    </div>
-                    <div class="has-text-centered" style="margin-top: 2rem;">
-                        <img src="static/images/results_math.png" alt="Math Benchmark Results">
-                        <p style="font-size: 0.95rem; font-style: italic;">Table 2: Accuracy comparison across math-related benchmarks.</p>
+                        <img src="static/images/negative_collection.png" alt="negative collection" />
+                        <p style="font-size: 0.95rem; font-style: italic; margin-top: 0.5rem;">Negative collection pipeline; GPT-4o decomposes queries into sub-queries, Google Search sub-queries to get hard-negatives</p>
                     </div>
                 </div>
             </div>
@@ -261,24 +213,277 @@
     </section>
 
     <section class="section has-background-light">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <h1 class="title is-3">Results</h1>
+                </div>
+            </div>
+            <div class="columns is-centered">
+                <div class="column is-four-fifths content has-text-justified">
+                    <div class="content" style="margin-bottom: 1rem;">
+                        <div id="results-table-container" class="table-container">
+                            <table id="results-table" class="table is-fullwidth">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 15%; text-align: center;">LLM</th>
+                                        <th style="width: 20%; text-align: center;">Retriever</th>
+                                        <th style="width: 15%; text-align: center;">Accuracy</th>
+                                        <th style="width: 15%; text-align: center;">Recall</th>
+                                        <th style="width: 15%; text-align: center;">Search Calls</th>
+                                        <th style="width: 20%; text-align: center;">Calibration Error</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                        <p id="results-table-caption" class="has-text-centered" style="font-size: 0.95rem; font-style: italic; margin-top: 0.5rem;">End-to-end agent accuracy on BrowseComp-Plus across LLMs and retrievers</p>
+                        <p id="results-table-note" class="has-text-centered" style="display:none; font-size: 0.9rem; color: #666;">Table data will be posted soon.</p>
+                    </div>
+                    <p>We evaluate popular Deep-Research agents paired with different retrievers on the following metrics:</p>
+                    <ol>
+                        <li><strong>Accuracy</strong>: The percentage of queries answered correctly, judged by gpt-4.1.</li>
+                        <li><strong>Recall</strong>: Fraction of evidence documents retrieved in at least one search call by the agent, relative to all evidence documents.</li>
+                        <li><strong>Search Calls</strong>: Number of search calls issued by the agent.</li>
+                        <li><strong>Calibration Error</strong>: Following BrowseComp, we prompt agents to estimate the confidence of their answers; calibration error measures the gap between a model's predicted confidence and actual accuracy.</li>
+                    </ol>
+                    <h3 class="title is-4">Effect of Retrievers</h3>
+                    <p>
+                        Stronger retrievers (e.g., Qwen3-Embedding-8B) consistently improve end-to-end accuracy of Deep-Research agents. They also reduce the number of search calls, likely because higher-quality initial retrievals reduce the need for follow-up searches; further, fewer search calls translate to fewer output tokens. That is, <strong>better retrievers deliver both efficiency and effectiveness gains.</strong>
+                    </p>
+                    <h3 class="title is-4">Search Calls vs. Accuracy</h3>
+                    <p>
+                        In general, more search calls correlate with higher accuracy. Closed-source agents tend to make substantially more search calls than open-source ones; for instance, OpenAI's gpt-5 and o3 average over 20 search calls per query, while Qwen3-32B and SearchR1-32B make fewer than 2, despite being explicitly prompted to use the tool. This gap in the ability to interleave extensive search calls and reasoning likely contributes to the gap in end-to-end accuracy between closed- and open-source agents.
+                    </p>
+                    <h3 class="title is-4">Impact of Reasoning Effort</h3>
+                    <div class="has-text-centered" style="margin-bottom: 1rem;">
+                        <img src="static/images/reasoning_effort.png" alt="Impact of reasoning effort" />
+                    </div>
+                    <p>
+                        We analyze how the reasoning effort of LLMs influences answer quality and retrieval behavior. To isolate this effect, we focus on the gpt-oss family, which offers three reasoning modes: <em>low</em>, <em>medium</em>, and <em>high</em>. These modes differ in the amount of computational effort and deliberation the model applies before producing an answer, with higher modes generally involving longer intermediate reasoning steps. Across all model sizes and retrievers, increasing the reasoning effort consistently boosts accuracy.
+                    </p>
+                    <h3 class="title is-4">Retriever-only Evaluation</h3>
+                    <div class="content" style="margin-bottom: 1rem;">
+                        <div id="retriever-table-container" class="table-container">
+                            <table id="retriever-table" class="table is-fullwidth">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 25%; text-align: center;">Retriever</th>
+                                        <th style="width: 18.75%; text-align: center;">Recall@5</th>
+                                        <th style="width: 18.75%; text-align: center;">Recall@100</th>
+                                        <th style="width: 18.75%; text-align: center;">Recall@1000</th>
+                                        <th style="width: 18.75%; text-align: center;">nDCG@10</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="retriever-table-body"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <p>
+                        We also evaluate the effectiveness of different retrievers alone, measuring each retriever's recall@k and nDCG@k scores against the labeled evidence and gold documents.
+                    </p>
+                    <ul>
+                        <li>Compared to BM25, Qwen3-Embedding-8B and ReasonIR-8B achieve substantially higher recall and nDCG for both evidence document retrieval and gold document retrieval.</li>
+                        <li>We observe a model size scaling law within the Qwen3 embedding family; larger models consistently perform better, with Qwen3-8B surpassing ReasonIR-8B at the 8B scale.</li>
+                        <li>However, even the best retriever, Qwen3-Embedding-8B, only achieves 20.3 nDCG@10, showcasing a substantial headroom for improvement.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+    <!-- Citation (final section) -->
+    <section class="section">
         <div class="container is-max-desktop">
             <div class="columns is-centered">
                 <div class="column is-four-fifths content">
                     <h2 class="title is-3">Citation</h2>
-                    <p>Please cite our work as below if you find it helpful:</p>
-                    <pre><code>@article{general-reasoner,
-    title={{G}eneral-{R}easoner: Advancing {LLM} Reasoning Across All Domains}, 
-    author={Xueguang Ma and Qian Liu and Dongfu Jiang and Ge Zhang and Zejun Ma and Wenhu Chen},
+                    <p>Please cite our work as below (placeholder):</p>
+                    <pre><code>@article{browsecomp-plus,
+    title={{B}rowse{C}omp-{P}lus: A More Fair and Transparent Evaluation Benchmark of Deep-Research Agent},
+    author={Chen, Zijian and Ma, Xueguang and Zhuang, Shengyao and Nie, Ping and Zou, Kai and Liu, Andrew and Green, Joshua and Patel, Kshama and Meng, Ruoxi and Su, Mingyi and Sharifymoghaddam, Sahel and Li, Yanxi and Hong, Haoran and Shi, Xinyu and Liu, Xuye and Thakur, Nandan and Zhang, Crystina and Gao, Luyu and Chen, Wenhu and Lin, Jimmy},
     year={2025},
-    journal={arXiv:2505.14652},
-    url={https://arxiv.org/abs/2505.14652}, 
+    journal={arXiv preprint},
+    url={https://texttron.github.io/BrowseComp-Plus/}
 }</code></pre>
                 </div>
             </div>
         </div>
     </section>
 
-    
+    <script src="static/js/jquery-3.5.1.js"></script>
+    <script src="static/js/jquery.dataTables.js"></script>
+    <script>
+        (function initResultsTable() {
+            const tableElement = document.getElementById('results-table');
+            if (!tableElement) return;
+
+            // Fallback data mirroring the LaTeX table. Each row: [LLM, Retriever, Accuracy, Recall, Search Calls, Calibration Error]
+            const fallbackData = [
+                ['gpt-4.1','BM25','14.58%','16.42%','10.35','68.96%'],
+                ['gpt-4.1','Qwen3-Embed-8B','35.42%','36.89%','8.67','54.67%'],
+                ['o3','BM25','49.28%','56.64%','25.93','12.58%'],
+                ['o3','Qwen3-Embed-8B','63.49%','73.24%','23.97','16.77%'],
+                ['gpt-5','BM25','55.90%','61.70%','23.23','13.50%'],
+                ['gpt-5','Qwen3-Embed-8B','70.12%','78.98%','21.74','9.11%'],
+                ['Sonnet 4','BM25','14.34%','21.31%','9.95','29.79%'],
+                ['Sonnet 4','Qwen3-Embed-8B','36.75%','47.33%','9.03','24.51%'],
+                ['Opus 4','BM25','15.54%','22.96%','11.22','22.00%'],
+                ['Opus 4','Qwen3-Embed-8B','36.14%','50.84%','10.24','12.79%'],
+                ['Gemini 2.5 Flash','BM25','15.54%','21.45%','10.56','29.28%'],
+                ['Gemini 2.5 Flash','Qwen3-Embed-8B','33.01%','40.19%','9.77','21.63%'],
+                ['Gemini 2.5 Pro','BM25','19.04%','22.81%','7.44','51.58%'],
+                ['Gemini 2.5 Pro','Qwen3-Embed-8B','28.67%','35.31%','6.04','44.08%'],
+                ['gpt-oss-120B-high','BM25','28.67%','35.50%','19.45','46.48%'],
+                ['gpt-oss-120B-high','Qwen3-Embed-8B','42.89%','52.63%','18.35','40.34%'],
+                ['Qwen3-32B','BM25','3.49%','3.12%','0.92','57.41%'],
+                ['Qwen3-32B','Qwen3-Embed-0.6B','4.10%','3.45%','0.91','60.71%'],
+                ['Qwen3-32B','Qwen3-Embed-4B','7.83%','6.20%','0.89','61.06%'],
+                ['Qwen3-32B','Qwen3-Embed-8B','10.36%','7.80%','0.94','59.84%'],
+                ['Qwen3-32B','ReasonIR','9.16%','7.59%','0.91','55.15%'],
+                ['SearchR1-32B','BM25','3.86%','2.61%','1.78','N/A'],
+                ['SearchR1-32B','Qwen3-Embed-0.6B','5.66%','5.30%','1.73','N/A'],
+                ['SearchR1-32B','Qwen3-Embed-4B','9.40%','7.90%','1.68','N/A'],
+                ['SearchR1-32B','Qwen3-Embed-8B','10.36%','10.17%','1.69','N/A'],
+                ['SearchR1-32B','ReasonIR','9.43%','8.37%','1.74','N/A'],
+            ];
+
+            function populate(rows) {
+                const tbody = tableElement.querySelector('tbody');
+                tbody.innerHTML = '';
+
+                // Group rows by LLM preserving order
+                const groups = [];
+                for (const r of rows) {
+                    const [llm] = r;
+                    const last = groups[groups.length - 1];
+                    if (!last || last.llm !== llm) {
+                        groups.push({ llm, rows: [r] });
+                    } else {
+                        last.rows.push(r);
+                    }
+                }
+
+                for (const g of groups) {
+                    const rowspan = g.rows.length;
+                    g.rows.forEach((r, idx) => {
+                        const tr = document.createElement('tr');
+                        if (idx === 0) tr.classList.add('group-start');
+                        const [llm, retriever, acc, rec, calls, ce] = r;
+
+                        if (idx === 0) {
+                            const llmTd = document.createElement('td');
+                            llmTd.className = 'llm-cell';
+                            llmTd.setAttribute('rowspan', String(rowspan));
+                            llmTd.textContent = llm;
+                            tr.appendChild(llmTd);
+                        }
+
+                        const cells = [retriever, acc, rec, calls, ce];
+                        for (const cell of cells) {
+                            const td = document.createElement('td');
+                            td.textContent = cell;
+                            tr.appendChild(td);
+                        }
+                        tbody.appendChild(tr);
+                    });
+                }
+                
+                // Don't initialize DataTables to avoid conflicts with rowspan
+            }
+
+            function parseCSV(text) {
+                const lines = text.trim().split(/\r?\n/);
+                if (lines.length <= 1) return [];
+                const rows = [];
+                for (let i = 1; i < lines.length; i++) {
+                    const cols = lines[i].split(',').map(s => s.trim());
+                    if (cols.length) rows.push(cols);
+                }
+                return rows;
+            }
+
+            fetch('static/data/main_table.csv', { cache: 'no-cache' })
+                .then(r => r.ok ? r.text() : Promise.reject())
+                .then(text => {
+                    const rows = parseCSV(text);
+                    if (rows.length === 0) throw new Error('empty');
+                    populate(rows);
+                })
+                .catch(() => {
+                    // Use fallback LaTeX-derived data
+                    populate(fallbackData);
+                    const note = document.getElementById('results-table-note');
+                    if (note) note.style.display = 'none';
+                });
+        })();
+
+        // Initialize retriever table
+        (function initRetrieverTable() {
+            const tableBody = document.getElementById('retriever-table-body');
+            if (!tableBody) return;
+
+            // Data from LaTeX table
+            const evidenceData = [
+                ['BM25', '1.2', '4.7', '13.7', '1.6'],
+                ['Qwen3-Embed-0.6B', '6.2', '26.5', '59.7', '8.0'],
+                ['Qwen3-Embed-4B', '9.8', '40.2', '71.8', '14.0'],
+                ['Qwen3-Embed-8B', '14.5', '47.7', '76.7', '20.3'],
+                ['ReasonIR-8B', '12.2', '43.6', '73.9', '16.8']
+            ];
+
+            const goldData = [
+                ['BM25', '1.4', '6.1', '17.3', '1.7'],
+                ['Qwen3-Embed-0.6B', '8.5', '30.5', '66.2', '7.4'],
+                ['Qwen3-Embed-4B', '13.0', '47.3', '77.0', '13.6'],
+                ['Qwen3-Embed-8B', '18.5', '55.8', '83.5', '19.5'],
+                ['ReasonIR-8B', '15.3', '49.7', '78.9', '15.5']
+            ];
+
+            // Create Evidence Document Retrieval section
+            const evidenceHeaderRow = document.createElement('tr');
+            evidenceHeaderRow.className = 'section-header';
+            const evidenceHeader = document.createElement('td');
+            evidenceHeader.setAttribute('colspan', '5');
+            evidenceHeader.textContent = 'Evidence Document Retrieval';
+            evidenceHeader.className = 'section-header-cell';
+            evidenceHeaderRow.appendChild(evidenceHeader);
+            tableBody.appendChild(evidenceHeaderRow);
+
+            // Add evidence data rows
+            for (const row of evidenceData) {
+                const tr = document.createElement('tr');
+                for (const cell of row) {
+                    const td = document.createElement('td');
+                    td.textContent = cell;
+                    tr.appendChild(td);
+                }
+                tableBody.appendChild(tr);
+            }
+
+            // Create Gold Document Retrieval section
+            const goldHeaderRow = document.createElement('tr');
+            goldHeaderRow.className = 'section-header section-separator';
+            const goldHeader = document.createElement('td');
+            goldHeader.setAttribute('colspan', '5');
+            goldHeader.textContent = 'Gold Document Retrieval';
+            goldHeader.className = 'section-header-cell';
+            goldHeaderRow.appendChild(goldHeader);
+            tableBody.appendChild(goldHeaderRow);
+
+            // Add gold data rows
+            for (const row of goldData) {
+                const tr = document.createElement('tr');
+                for (const cell of row) {
+                    const td = document.createElement('td');
+                    td.textContent = cell;
+                    tr.appendChild(td);
+                }
+                tableBody.appendChild(tr);
+            }
+        })();
+    </script>
 
 </body>
 </html>

@@ -11,13 +11,10 @@
      font-family: 'Noto Sans', sans-serif;
  }
  
- #tabResults td:nth-child(2),
- #tabResults td:nth-child(3),
- #tabResults td:nth-child(8),
- #tabResults td:nth-child(14) {
-     /* border-left: 1px solid black;
-        border-right: 1px solid black; */
- }
+#tabResults td:nth-child(2),
+#tabResults td:nth-child(3),
+#tabResults td:nth-child(8),
+#tabResults td:nth-child(14) { border: none; }
  
  .subtitle {
      font-size: 16px;
@@ -47,7 +44,7 @@
      font-family: 'Google Sans', sans-serif;
  }
  
- .publication-title {}
+.publication-title { letter-spacing: 0.02em; }
  
  .publication-banner {
      max-height: parent;
@@ -61,11 +58,131 @@
      object-fit: fit;
  }
  
- .publication-header .hero-body {}
+.publication-header .hero-body { padding-top: 0; }
  
  .publication-title {
      font-family: 'Google Sans', sans-serif;
  }
+
+/* tighten spacing between hero icons and subsequent content */
+.publication-links { margin-bottom: 0; }
+
+/* Ensure captions inside centered blocks are actually centered */
+.has-text-centered p {
+  text-align: center !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Visual grouping for LLM blocks in results table */
+table#results-table tr.group-start td {
+  border-top: 2px solid #ccc;
+}
+
+/* Custom table styling for rowspan support */
+#results-table-container {
+  border: 1px solid #dbdbdb;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+table#results-table {
+  border: none;
+  margin-bottom: 0;
+}
+
+table#results-table thead th {
+  background-color: #f5f5f5;
+  border-bottom: 2px solid #dbdbdb;
+  padding: 0.5rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+table#results-table tbody td {
+  padding: 0.5rem;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+/* Style the LLM cell with rowspan */
+table#results-table td.llm-cell {
+  vertical-align: middle;
+  font-weight: normal;
+  text-align: center;
+  background-color: #fafafa;
+  border-right: 2px solid #dbdbdb;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.8rem;
+}
+
+/* Group separation */
+table#results-table tr.group-start td {
+  border-top: 2px solid #dbdbdb;
+}
+
+/* Hover effect for rows */
+table#results-table tbody tr:hover td {
+  background-color: #f9f9f9;
+}
+
+table#results-table tbody tr:hover td.llm-cell {
+  background-color: #f0f0f0;
+}
+
+/* Retriever table styling */
+#retriever-table-container {
+  border: 1px solid #dbdbdb;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+table#retriever-table {
+  border: none;
+  margin-bottom: 0;
+}
+
+table#retriever-table thead th {
+  background-color: #f5f5f5;
+  border-bottom: 2px solid #dbdbdb;
+  padding: 0.5rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+table#retriever-table tbody td {
+  padding: 0.5rem;
+  border-bottom: 1px solid #f0f0f0;
+  vertical-align: middle;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+/* Section headers for retriever table */
+table#retriever-table tr.section-header td.section-header-cell {
+  background-color: #e8e8e8;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 0.6rem;
+  border-bottom: 2px solid #dbdbdb;
+}
+
+/* Separator between Evidence and Gold sections */
+table#retriever-table tr.section-separator td {
+  border-top: 3px solid #999;
+}
+
+/* Hover effect for retriever table rows */
+table#retriever-table tbody tr:hover td {
+  background-color: #f9f9f9;
+}
+
+table#retriever-table tbody tr.section-header:hover td {
+  background-color: #e8e8e8;
+}
  
  .publication-authors {
      font-family: 'Google Sans', sans-serif;
@@ -83,7 +200,7 @@
      font-weight: bolder;
  }
  
- .publication-authors {}
+.publication-authors { line-height: 1.4; }
  
  .publication-authors a {
      color: hsl(204, 86%, 53%) !important;
@@ -97,11 +214,9 @@
      display: inline-block;
  }
  
- .publication-banner img {}
+.publication-banner img { max-width: 100%; height: auto; }
  
- .publication-authors {
-     /*color: #4286f4;*/
- }
+ .publication-authors { color: inherit; }
  
  .publication-video {
      position: relative;
@@ -120,7 +235,7 @@
      height: 100%;
  }
  
- .publication-body img {}
+.publication-body img { max-width: 100%; height: auto; }
  
  .results-carousel {
      overflow: hidden;
