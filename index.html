@@ -10,7 +10,9 @@
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
 
-    <title>BrowseComp-Plus</title>
+    <title>BrowseComp-Plus: A More Fair and Transparent Evaluation Benchmark of Deep-Research Agent</title>
+    <link rel="icon" type="image/svg+xml" href="static/images/favicon.svg">
+    <link rel="alternate icon" href="static/images/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
     <link rel="stylesheet" href="static/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
@@ -188,7 +190,7 @@
                     </p>
                     <div class="has-text-centered" style="margin-bottom: 1rem;">
                         <img src="static/images/positive_collection.png" alt="positive collection" />
-                        <p style="font-size: 0.95rem; font-style: italic; margin-top: 0.5rem;">Positive collection pipeline; o3 searches initial candidates, enhanced by human annotators</p>
+                        <p style="font-size: 0.95rem; font-style: italic; margin-top: 0.5rem;">Positive collection pipeline: o3 searches initial candidates, enhanced by human annotators</p>
                     </div>
                     <p>
                         In addition to <strong>evidence</strong> documents, annotators also label the documents that <em>semantically</em> contain the final answer, designated as <strong>gold</strong> documents. These labels are later used to perform retriever-only evaluation.
@@ -201,7 +203,7 @@
                     </p>
                     <div class="has-text-centered">
                         <img src="static/images/negative_collection.png" alt="negative collection" />
-                        <p style="font-size: 0.95rem; font-style: italic; margin-top: 0.5rem;">Negative collection pipeline; GPT-4o decomposes queries into sub-queries, Google Search sub-queries to get hard-negatives</p>
+                        <p style="font-size: 0.95rem; font-style: italic; margin-top: 0.5rem;">Negative collection pipeline: GPT-4o decomposes queries into sub-queries, Google Search sub-queries to get hard-negatives</p>
                     </div>
                 </div>
             </div>
@@ -389,30 +391,8 @@
                 // Don't initialize DataTables to avoid conflicts with rowspan
             }
 
-            function parseCSV(text) {
-                const lines = text.trim().split(/\r?\n/);
-                if (lines.length <= 1) return [];
-                const rows = [];
-                for (let i = 1; i < lines.length; i++) {
-                    const cols = lines[i].split(',').map(s => s.trim());
-                    if (cols.length) rows.push(cols);
-                }
-                return rows;
-            }
-
-            fetch('static/data/main_table.csv', { cache: 'no-cache' })
-                .then(r => r.ok ? r.text() : Promise.reject())
-                .then(text => {
-                    const rows = parseCSV(text);
-                    if (rows.length === 0) throw new Error('empty');
-                    populate(rows);
-                })
-                .catch(() => {
-                    // Use fallback LaTeX-derived data
-                    populate(fallbackData);
-                    const note = document.getElementById('results-table-note');
-                    if (note) note.style.display = 'none';
-                });
+            // Directly populate with built-in data (no CSV fetch)
+            populate(fallbackData);
         })();
 
         // Initialize retriever table
