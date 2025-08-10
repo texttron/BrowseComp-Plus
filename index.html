@@ -258,7 +258,7 @@
                         <img src="static/images/reasoning_effort.png" alt="Impact of reasoning effort" />
                     </div>
                     <p>
-                        We analyze how the reasoning effort of LLMs influences answer quality and retrieval behavior. To isolate this effect, we focus on the gpt-oss family, which offers three reasoning modes: <em>low</em>, <em>medium</em>, and <em>high</em>. These modes differ in the amount of computational effort and deliberation the model applies before producing an answer, with higher modes generally involving longer intermediate reasoning steps. Across all model sizes and retrievers, increasing the reasoning effort consistently boosts accuracy.
+                        We analyze how the reasoning effort of LLMs influences answer quality and retrieval behavior. To isolate this effect, we focus on OpenAI's <a href="https://openai.com/index/introducing-gpt-oss/" target="_blank">OSS family</a>, which offers three reasoning modes: <em>low</em>, <em>medium</em>, and <em>high</em>. These modes differ in the amount of computational effort and deliberation the model applies before producing an answer, with higher modes generally involving longer intermediate reasoning steps. Across all model sizes and retrievers, increasing the reasoning effort consistently boosts accuracy.
                     </p>
                     <h3 class="title is-4">Retriever-only Evaluation</h3>
                     <div class="content" style="margin-bottom: 1rem;">
@@ -333,8 +333,8 @@
                 ['Gemini 2.5 Flash','Qwen3-Embed-8B','33.01%','40.19%','9.77','21.63%'],
                 ['Gemini 2.5 Pro','BM25','19.04%','22.81%','7.44','51.58%'],
                 ['Gemini 2.5 Pro','Qwen3-Embed-8B','28.67%','35.31%','6.04','44.08%'],
-                ['gpt-oss-120B-high','BM25','28.67%','35.50%','19.45','46.48%'],
-                ['gpt-oss-120B-high','Qwen3-Embed-8B','42.89%','52.63%','18.35','40.34%'],
+                ['oss-120B-high','BM25','28.67%','35.50%','19.45','46.48%'],
+                ['oss-120B-high','Qwen3-Embed-8B','42.89%','52.63%','18.35','40.34%'],
                 ['Qwen3-32B','BM25','3.49%','3.12%','0.92','57.41%'],
                 ['Qwen3-32B','Qwen3-Embed-0.6B','4.10%','3.45%','0.91','60.71%'],
                 ['Qwen3-32B','Qwen3-Embed-4B','7.83%','6.20%','0.89','61.06%'],
