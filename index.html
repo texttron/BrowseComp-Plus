@@ -136,7 +136,7 @@
                             <img src="static/images/teaser.png" alt="Teaser" />
                             <p class="has-text-centered" style="font-size: 0.95rem; font-style: italic; margin-top: 0.5rem;">
                                 Teaser: Accuracy vs. number of search calls for Deep-Research agents with different retrievers.<br/>
-                                The figure shows that <strong>Deep-Research agents mostly improve the final accuracy at a cost of more search calls</strong>, whereas better retrieval systems not only improve the overall accuracy but also reduce the number of search calls. That is, <strong>better retrievers lead to both efficiency and effectiveness.</strong>
+                                The figure shows that <strong>Deep-Research agents mostly improve the final accuracy at a cost of more search calls</strong>, whereas better retrieval systems not only improve the overall accuracy but also reduce the number of search calls. That is, <strong>better retrievers lead to both efficiency and effectiveness. For reference, GPT-5 achieves 59.9\% accuracy when evaluated using the Google Search API.</strong>
                             </p>
                         </div>
                     </div>
@@ -145,30 +145,6 @@
         </div>
     </section>
     
-    <section class="section has-background-light">
-        <div class="container is-max-desktop">
-            <div class="columns is-centered has-text-centered">
-                <div class="column is-four-fifths">
-                    <h1 class="title is-3">Why a new benchmark?</h1>
-                </div>
-            </div>
-            <div class="columns is-centered">
-                <div class="column is-four-fifths content has-text-justified">
-                    <p>Existing benchmarks for Deep-Research agents consist of question-answer pairs, and require agents to answer them using live web search APIs in real time. This setup introduces major fairness and reproducibility issues:</p>
-                    <ol>
-                        <li><strong>The internet is a moving target</strong>. The web constantly changes; thus, a system evaluated today on the web may be able to answer different queries evaluated tomorrow. This is especially crucial in the presence of data leakage (e.g., public releases of query-answer pairs on Hugging Face), which renders evaluations meaningless if agents see leaked data.</li>
-                        <li><strong>Web search APIs lack transparency</strong>. Black-box web search APIs add to the complexity of the moving target; they vary in retrieval algorithms and indexed content overtime, hindering apples-to-apples comparisons across time, even when using the same API.</li>
-                    </ol>
-                    <p>
-                        With a fixed corpus, BrowseComp-Plus has complete control over the retrieval process used by Deep-Research agents, <strong>isolating the effect of the retriever</strong>. This not only enables fair, reproducible evaluations in the same retrieval setting, but also allows us to systematically compare the effects of different retrievers paired with the same LLM agent, answering the question:
-                    </p>
-                    <p style="text-align: center; margin: 1.5rem 0;">
-                        <span style="background-color: #ffcdd2; padding: 8px 16px; border-radius: 8px; font-size: 1.2em; font-weight: bold; display: inline-block;">"How much does the retriever matter in Deep-Research?"</span>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
 
 
 
