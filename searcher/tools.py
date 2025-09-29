@@ -12,6 +12,7 @@ def register_tools(
     k: int = 5,
     include_get_document: bool = True,
 ):
+
     tokenizer = None
     if snippet_max_tokens and snippet_max_tokens > 0:
         tokenizer = AutoTokenizer.from_pretrained("Qwen/Qwen3-0.6B")

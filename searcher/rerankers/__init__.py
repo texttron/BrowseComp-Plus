@@ -12,10 +12,8 @@ from .batch_listwise_reranker_vllm import BatchListwiseRerankerVLLM
 class RerankerType(Enum):
     """Enum for managing available reranker types and their CLI mappings."""
 
-    LISTWISE_OPENAI = ("listwise_openai", ListwiseRerankerOpenAI)
     LISTWISE_VLLM = ("listwise_vllm", ListwiseRerankerVLLM)
     BATCH_LISTWISE_VLLM = ("batch_listwise_vllm", BatchListwiseRerankerVLLM)
-    # POINTWISE = ("pointwise", PointwiseReranker)
     # CUSTOM = ("custom", CustomReranker) # Your custom reranker class, yet to be implemented
 
     def __init__(self, cli_name, reranker_class):

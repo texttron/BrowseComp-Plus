@@ -57,7 +57,7 @@ class ListwiseRerankerVLLM(BaseReranker):
             help="The max number tokens used for reasoning",
         )
         parser.add_argument(
-            "--vllm-base-url",
+            "--reranker-base-url",
             type=str,
             default="http://localhost:18000/v1",
             help="The url for the vllm server used by the reranker for inference calls.",
@@ -76,7 +76,7 @@ class ListwiseRerankerVLLM(BaseReranker):
             window_size=args.window_size,
             stride=args.stride,
             is_thinking=True,
-            base_url=args.vllm_base_url,
+            base_url=args.reranker_base_url,
             reasoning_token_budget=args.reasoning_token_budget,
         )
         self.reranker = Reranker(model_coordinator)
@@ -127,9 +127,7 @@ class ListwiseRerankerVLLM(BaseReranker):
         )
         writer = DataWriter(rerank_results, append=True)
         writer.write_inference_invocations_history(history_file_name)
-        temp = self._process_rerank_result(rerank_results[0])
-        print(f"{[doc['docid'] for doc in temp]}")
-        return temp
+        return self._process_rerank_result(rerank_results[0])
 
     def rerank_batch(
         self,

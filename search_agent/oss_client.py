@@ -530,8 +530,6 @@ def main():
     )
 
     searcher = searcher_class(reranker, args)
-    out_dir = Path(args.output_dir).expanduser().resolve()
-    ts = datetime.utcnow().strftime("%Y%m%dT%H%M%S%fZ")
     tool_handler = SearchToolHandler(
         searcher=searcher,
         snippet_max_tokens=args.snippet_max_tokens,

@@ -224,10 +224,10 @@ def run_conversation_with_tools(
                 )
 
             if hasattr(usage, "output_tokens_details") and usage.output_tokens_details:
-                    cumulative_usage["output_tokens_details"][
-                        "reasoning_tokens"
-                    ] += getattr(usage.output_tokens_details, "reasoning_tokens", 0)
-        
+                cumulative_usage["output_tokens_details"][
+                    "reasoning_tokens"
+                ] += getattr(usage.output_tokens_details, "reasoning_tokens", 0)
+
         function_calls = [
             item
             for item in response.output
@@ -701,6 +701,7 @@ def main():
     )
 
     rprint(response)
+
 
 if __name__ == "__main__":
     main()
