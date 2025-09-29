@@ -223,6 +223,11 @@ def run_conversation_with_tools(
                     usage.input_tokens_details, "cached_tokens", 0
                 )
 
+            if hasattr(usage, "output_tokens_details") and usage.output_tokens_details:
+                    cumulative_usage["output_tokens_details"][
+                        "reasoning_tokens"
+                    ] += getattr(usage.output_tokens_details, "reasoning_tokens", 0)
+        
         function_calls = [
             item
             for item in response.output
@@ -695,6 +700,7 @@ def main():
         query_id=None,
     )
 
+    rprint(response)
 
 if __name__ == "__main__":
     main()

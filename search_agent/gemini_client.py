@@ -117,6 +117,7 @@ def _persist_response(
     pending_calls = {}
 
     for part in _part_iter():
+
         fc = part.get("function_call")
         fr = part.get("function_response")
 

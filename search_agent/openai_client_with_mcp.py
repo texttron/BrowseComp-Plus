@@ -82,6 +82,7 @@ def build_request(
 def _persist_response(
     out_dir: str, request_body: dict, response, *, query_id: str | None = None
 ):
+
     os.makedirs(out_dir, exist_ok=True)
 
     response_dict = response.model_dump(mode="python")

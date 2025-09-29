@@ -434,7 +434,7 @@ def main():
 
     json_files = list(input_dir.glob("run_*.json"))
     if not json_files:
-        print(f"No JSON files found in {input_dir}")
+        print(f"No JSON files starting with 'run_' found in {input_dir}")
         return
 
     print(f"Found {len(json_files)} JSON files to evaluate")
