@@ -39,10 +39,10 @@ class SearchToolHandler(BaseTool):
             if passage_text.startswith("---\ntitle:"):
                 lines = passage_text.split("\n")
                 if len(lines) > 1:
-                    title = lines[1].replace("title:", "").strip().strip("\"")
+                    title = lines[1].replace("title:", "").strip().strip('"')
 
             if not title:
-                first_line = passage_text.split('\n')[0].strip()
+                first_line = passage_text.split("\n")[0].strip()
                 title = first_line[:50] + "..." if len(first_line) > 50 else first_line
 
             snippet = self._truncate(passage_text, max_tokens)
@@ -61,7 +61,10 @@ class SearchToolHandler(BaseTool):
             results = self.searcher.search(query, k)
 
             if not results:
-                return f"No results found for '{query}'. Try with a more general query.", []
+                return (
+                    f"No results found for '{query}'. Try with a more general query.",
+                    [],
+                )
 
             docids = []
             for r in results:
@@ -70,7 +73,10 @@ class SearchToolHandler(BaseTool):
 
             formatted_results = self._format_results(results, self.snippet_max_tokens)
 
-            content = f"A search for '{query}' found {len(formatted_results)} results:\n\n## Web Results\n" + "\n\n".join(formatted_results)
+            content = (
+                f"A search for '{query}' found {len(formatted_results)} results:\n\n## Web Results\n"
+                + "\n\n".join(formatted_results)
+            )
             return content, docids
 
         except Exception as e:
@@ -80,13 +86,19 @@ class SearchToolHandler(BaseTool):
         try:
             query = params["query"]
         except:
-            return "[Search] Invalid request format: Input must be a JSON object containing 'query' field", None
+            return (
+                "[Search] Invalid request format: Input must be a JSON object containing 'query' field",
+                None,
+            )
 
         if not isinstance(query, str):
             if isinstance(query, list) and len(query) == 1:
                 query = query[0]
             else:
-                return "[Search] Invalid request format: 'query' must be a string, not an array", None
+                return (
+                    "[Search] Invalid request format: 'query' must be a string, not an array",
+                    None,
+                )
 
         response, docids = self.search_with_searcher(query)
         return response, docids

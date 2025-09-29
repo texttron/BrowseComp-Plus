@@ -64,7 +64,6 @@ def build_messages(
 def _persist_response(
     out_dir: str, request_config: dict, response, *, query_id: str | None = None
 ):
-
     os.makedirs(out_dir, exist_ok=True)
 
     results: list[dict] = []

@@ -4,7 +4,7 @@ BM25 searcher implementation using Pyserini.
 
 import json
 import logging
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 
 from pyserini.search.lucene import LuceneSearcher
 
@@ -22,7 +22,8 @@ class BM25Searcher(BaseSearcher):
             help="Name or path of Lucene index (e.g. msmarco-v1-passage).",
         )
 
-    def __init__(self, args):
+    def __init__(self, reranker, args):
+        super().__init__(reranker)
         if not args.index_path:
             raise ValueError("index_path is required for BM25 searcher")
 
@@ -40,7 +41,7 @@ class BM25Searcher(BaseSearcher):
 
         logger.info("BM25 searcher initialized successfully")
 
-    def search(self, query: str, k: int = 10) -> list[dict[str, Any]]:
+    def _retrieve(self, query: str, k: int = 10) -> list[dict[str, Any]]:
         if not self.searcher:
             raise RuntimeError("Searcher not initialized")
 
@@ -67,6 +68,26 @@ class BM25Searcher(BaseSearcher):
             "docid": docid,
             "text": json.loads(doc.raw())["contents"],
         }
+
+    def retrieve_batch(
+        self, queries: List[str], qids: List[str], k: int = 10
+    ) -> Dict[str, list[dict[str, Any]]]:
+        if not self.searcher:
+            raise RuntimeError("Searcher not initialized")
+
+        raw_results = self.searcher.batch_search(queries, qids, k=k, threads=4)
+        results = {}
+        for qid in qids:
+            hits = raw_results[qid]
+            retrieved_cands = []
+            for hit in hits:
+                raw = json.loads(hit.lucene_document.get("raw"))
+                retrieved_cands.append(
+                    {"docid": hit.docid, "score": hit.score, "text": raw["contents"]}
+                )
+            results[qid] = retrieved_cands
+
+        return results
 
     @property
     def search_type(self) -> str:

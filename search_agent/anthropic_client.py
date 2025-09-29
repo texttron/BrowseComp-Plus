@@ -290,7 +290,6 @@ def _persist_response(
     pause_restarts: int = 0,
     store_raw: bool = False,
 ):
-
     os.makedirs(out_dir, exist_ok=True)
 
     try:
@@ -423,7 +422,6 @@ def _persist_response(
 
 
 def _process_tsv_dataset(tsv_path: str, client: Anthropic, args):
-
     dataset_path = Path(tsv_path)
     if not dataset_path.is_file():
         raise FileNotFoundError(f"TSV file not found: {tsv_path}")
@@ -456,7 +454,6 @@ def _process_tsv_dataset(tsv_path: str, client: Anthropic, args):
     )
 
     def _handle_single_query(qid: str, qtext: str):
-
         iter_args = argparse.Namespace(**vars(args))
         iter_args.query = qtext
 

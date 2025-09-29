@@ -71,7 +71,8 @@ class FaissSearcher(BaseSearcher):
             help="Maximum sequence length for FAISS search (default: 8192)",
         )
 
-    def __init__(self, args):
+    def __init__(self, reranker, args):
+        super().__init__(reranker)
         if args.model_name == "bm25":
             raise ValueError("model_name cannot be 'bm25' for FAISS searcher")
         if not args.index_path:
@@ -248,7 +249,15 @@ class FaissSearcher(BaseSearcher):
                 f"Failed to load dataset '{self.args.dataset_name}': {e}"
             )
 
-    def search(self, query: str, k: int = 10) -> List[Dict[str, Any]]:
+    def retrieve_batch(
+        self, queries: List[str], qids: List[str], k: int = 10
+    ) -> Dict[str, list[dict[str, Any]]]:
+        results = {}
+        for qid, query in zip(qids, queries):
+            results[qid] = self._retrieve(query, k)
+        return results
+
+    def _retrieve(self, query: str, k: int = 10) -> List[Dict[str, Any]]:
         if not all([self.retriever, self.model, self.tokenizer, self.lookup]):
             raise RuntimeError("Searcher not properly initialized")
 

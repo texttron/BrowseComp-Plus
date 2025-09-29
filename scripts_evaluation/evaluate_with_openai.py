@@ -12,6 +12,7 @@ from typing import Dict, List, Optional
 import numpy as np
 import openai
 from tqdm import tqdm
+from dotenv import load_dotenv
 
 sys.path.append(str(Path(__file__).parent.parent))
 from search_agent.prompts import GRADER_TEMPLATE
@@ -431,7 +432,7 @@ def main():
     output_dir = mirror_directory_structure(input_dir, eval_dir)
     print(f"Evaluations will be saved to {output_dir}")
 
-    json_files = list(input_dir.glob("*.json"))
+    json_files = list(input_dir.glob("run_*.json"))
     if not json_files:
         print(f"No JSON files found in {input_dir}")
         return
@@ -441,6 +442,7 @@ def main():
     all_results = []
     skipped = 0
 
+    load_dotenv()
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
         raise RuntimeError("OPENAI_API_KEY is not set in environment")
