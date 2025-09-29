@@ -2,9 +2,9 @@
 Abstract base class for rerank implementations.
 """
 
+import argparse
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List, Optional
-import argparse
 
 
 class BaseReranker(ABC):

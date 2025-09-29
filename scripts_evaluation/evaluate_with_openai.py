@@ -11,8 +11,8 @@ from typing import Dict, List, Optional
 
 import numpy as np
 import openai
-from tqdm import tqdm
 from dotenv import load_dotenv
+from tqdm import tqdm
 
 sys.path.append(str(Path(__file__).parent.parent))
 from search_agent.prompts import GRADER_TEMPLATE

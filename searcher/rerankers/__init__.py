@@ -3,10 +3,10 @@ Rerankers package for different rerank implementations.
 """
 
 from enum import Enum
+
 from .base import BaseReranker
-from .listwise_reranker_openai import ListwiseRerankerOpenAI
-from .listwise_reranker_vllm import ListwiseRerankerVLLM
 from .batch_listwise_reranker_vllm import BatchListwiseRerankerVLLM
+from .listwise_reranker_vllm import ListwiseRerankerVLLM
 
 
 class RerankerType(Enum):

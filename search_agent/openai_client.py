@@ -8,10 +8,8 @@ from datetime import datetime
 from pathlib import Path
 
 import openai
-from prompts import format_query
-from concurrent.futures import ThreadPoolExecutor, as_completed
 from dotenv import load_dotenv
-
+from prompts import format_query
 from rich import print as rprint
 from tqdm import tqdm
 

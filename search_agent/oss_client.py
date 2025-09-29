@@ -16,10 +16,9 @@ from tqdm import tqdm
 from transformers import AutoTokenizer
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-from searcher.rerankers import RerankerType
-from searcher.searchers import SearcherType
 from utils import extract_retrieved_docids_from_result
 
+from searcher.rerankers import RerankerType
 from searcher.searchers import SearcherType
 
 

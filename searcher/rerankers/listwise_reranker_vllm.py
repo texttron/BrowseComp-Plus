@@ -1,9 +1,9 @@
 import os
 from datetime import datetime
-from typing import Any, Dict, List
 from importlib.resources import files
+from typing import Any, Dict, List
 
-from rank_llm.data import DataWriter, Request, Query, Candidate, Result
+from rank_llm.data import Candidate, DataWriter, Query, Request, Result
 from rank_llm.rerank import Reranker
 from rank_llm.rerank.listwise import RankListwiseOSLLM
 

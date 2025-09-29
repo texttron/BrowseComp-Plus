@@ -1,18 +1,17 @@
-import os
-from datetime import datetime
-from typing import Any, Dict, List, Optional, Tuple
-from importlib.resources import files
-
-from rank_llm.data import DataWriter, Request, Query, Candidate, Result
-from rank_llm.rerank import Reranker
-from rank_llm.rerank.listwise import RankListwiseOSLLM
-
 # NEW imports
 import atexit
-import threading
+import os
 import queue
+import threading
 import time
 from concurrent.futures import Future
+from datetime import datetime
+from importlib.resources import files
+from typing import Any, Dict, List, Optional, Tuple
+
+from rank_llm.data import Candidate, DataWriter, Query, Request, Result
+from rank_llm.rerank import Reranker
+from rank_llm.rerank.listwise import RankListwiseOSLLM
 
 from .base import BaseReranker
 
