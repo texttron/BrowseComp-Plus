@@ -3,7 +3,7 @@ Placeholder for custom searcher. Implement your own searcher here.
 """
 
 import logging
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 
 from .base import BaseSearcher
 
@@ -16,13 +16,14 @@ class CustomSearcher(BaseSearcher):
         # Parse arguments from CLI that you will need to instantiate the searcher
         pass
 
-    def __init__(self, args):
+    def __init__(self, reranker, args):
+        super().__init__(reranker)
         # Initialize the searcher with the arguments
         self.args = args
         # ...
 
-    def search(self, query: str, k: int = 10) -> list[dict[str, Any]]:
-        # Implement your search logic here
+    def _retrieve(self, query: str, k: int = 10) -> list[dict[str, Any]]:
+        # Implement your retrieval logic here
         # ...
         return [
             {
@@ -32,6 +33,21 @@ class CustomSearcher(BaseSearcher):
             },
             # ...
         ]
+
+    def retrieve_batch(
+        self, queries: List[str], qids: List[str], k: int = 10
+    ) -> Dict[str, list[dict[str, Any]]]:
+        # Implement your retrieval batch  logic here
+        return {
+            "qid": [
+                {
+                    "docid": "place-holder-docid",  # Required
+                    "score": 0.0,  # Optional
+                    "text": "place-holder-text",  # Required
+                },
+                # ...
+            ]
+        }
 
     def get_document(self, docid: str) -> Optional[Dict[str, Any]]:
         # Implement your logic for getting a full document by id

@@ -8,6 +8,7 @@ from datetime import datetime
 from pathlib import Path
 
 import openai
+from dotenv import load_dotenv
 from prompts import format_query
 from rich import print as rprint
 from tqdm import tqdm
@@ -17,6 +18,7 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from transformers import AutoTokenizer
 from utils import extract_retrieved_docids_from_result
 
+from searcher.rerankers import RerankerType
 from searcher.searchers import SearcherType
 
 
@@ -83,14 +85,14 @@ class SearchToolHandler:
 
     def execute_tool(self, tool_name: str, arguments: dict):
         if tool_name == "search":
-            return self._search(arguments["query"])
+            return self._search(arguments["query"], arguments["query_id"])
         elif tool_name == "get_document":
             return self._get_document(arguments["docid"])
         else:
             raise ValueError(f"Unknown tool: {tool_name}")
 
-    def _search(self, query: str):
-        candidates = self.searcher.search(query, self.k)
+    def _search(self, query: str, query_id: str | None):
+        candidates = self.searcher.search(query, query_id, self.k)
 
         if self.snippet_max_tokens and self.snippet_max_tokens > 0 and self.tokenizer:
             for cand in candidates:
@@ -119,7 +121,6 @@ class SearchToolHandler:
                         "snippet": cand["snippet"],
                     }
                 )
-
         return json.dumps(results, indent=2)
 
     def _get_document(self, docid: str):
@@ -172,9 +173,9 @@ def run_conversation_with_tools(
     client: openai.OpenAI,
     initial_request: dict,
     tool_handler: SearchToolHandler,
+    query_id: str | None = None,
     max_iterations: int = 100,
 ):
-
     input_messages = initial_request["input"].copy()
     global_max_tokens = initial_request["max_output_tokens"]
 
@@ -231,7 +232,6 @@ def run_conversation_with_tools(
             for item in response.output
             if getattr(item, "type", None) == "function_call"
         ]
-
         if not function_calls:
             return response, combined_output, cumulative_usage, tool_outputs
 
@@ -243,6 +243,7 @@ def run_conversation_with_tools(
         for tool_call in function_calls:
             try:
                 args = json.loads(tool_call.arguments)
+                args["query_id"] = query_id
                 result = tool_handler.execute_tool(tool_call.name, args)
 
                 tool_outputs[tool_call.id] = {
@@ -447,10 +448,13 @@ def _process_tsv_dataset(
         )
 
         try:
-            response, combined_output, cumulative_usage, tool_outputs = (
-                run_conversation_with_tools(
-                    client, request_body, tool_handler, args.max_iterations
-                )
+            (
+                response,
+                combined_output,
+                cumulative_usage,
+                tool_outputs,
+            ) = run_conversation_with_tools(
+                client, request_body, tool_handler, qid, args.max_iterations
             )
 
             if response.status == "completed":
@@ -568,6 +572,12 @@ def main():
         required=True,
         help=f"Type of searcher to use: {', '.join(SearcherType.get_choices())}",
     )
+    parser.add_argument(
+        "--reranker-type",
+        choices=RerankerType.get_choices(),
+        default=None,
+        help=f"Type of reranker to use: None, {', '.join(SearcherType.get_choices())}",
+    )
 
     # Server configuration arguments
     parser.add_argument(
@@ -599,6 +609,12 @@ def main():
     )
 
     temp_args, _ = parser.parse_known_args()
+    reranker = None
+    if temp_args.reranker_type:
+        reranker_class = RerankerType.get_reranker_class(temp_args.reranker_type)
+        reranker_class.parse_args(parser)
+        rerank_args, _ = parser.parse_known_args()
+        reranker = reranker_class(rerank_args)
     searcher_class = SearcherType.get_searcher_class(temp_args.searcher_type)
     searcher_class.parse_args(parser)
 
@@ -613,13 +629,13 @@ def main():
         print(f"[DEBUG] Setting HF home from CLI argument: {args.hf_home}")
         os.environ["HF_HOME"] = args.hf_home
 
+    load_dotenv()
     api_key = os.getenv("OPENAI_API_KEY")
     if not api_key:
         raise RuntimeError("OPENAI_API_KEY is not set in environment")
 
     client = openai.OpenAI(api_key=api_key)
-
-    searcher = searcher_class(args)
+    searcher = searcher_class(reranker, args)
 
     tool_handler = SearchToolHandler(
         searcher=searcher,
@@ -664,10 +680,13 @@ def main():
     )
 
     print("Sending request to OpenAI Responses API with function calling...")
-    response, combined_output, cumulative_usage, tool_outputs = (
-        run_conversation_with_tools(
-            client, request_body, tool_handler, args.max_iterations
-        )
+    (
+        response,
+        combined_output,
+        cumulative_usage,
+        tool_outputs,
+    ) = run_conversation_with_tools(
+        client, request_body, tool_handler, None, args.max_iterations
     )
 
     _persist_response(

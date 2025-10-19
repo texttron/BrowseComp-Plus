@@ -10,6 +10,7 @@ if current_dir not in sys.path:
     sys.path.insert(0, current_dir)
 
 from dotenv import load_dotenv
+from rerankers import RerankerType
 from searchers import SearcherType
 from tools import register_tools
 
@@ -30,6 +31,13 @@ def main():
             choices=SearcherType.get_choices(),
             required=True,
             help=f"Type of searcher to use: {', '.join(SearcherType.get_choices())}",
+        )
+
+        parser.add_argument(
+            "--reranker-type",
+            choices=RerankerType.get_choices(),
+            default=None,
+            help=f"Type of reranker to use: None, {', '.join(RerankerType.get_choices())}, by default None",
         )
 
         # MCP server and high-level arguments
@@ -80,10 +88,15 @@ def main():
 
         temp_args, _ = parser.parse_known_args()
 
+        reranker = None
+        if temp_args.reranker_type:
+            reranker_class = RerankerType.get_reranker_class(temp_args.reranker_type)
+            reranker_class.parse_args(parser)
+            rerank_args, _ = parser.parse_known_args()
+            reranker = reranker_class(rerank_args)
+
         searcher_class = SearcherType.get_searcher_class(temp_args.searcher_type)
-
         searcher_class.parse_args(parser)
-
         args = parser.parse_args()
 
         if args.hf_token:
@@ -97,7 +110,7 @@ def main():
             print(f"[DEBUG] Setting HF home from CLI argument: {args.hf_home}")
             os.environ["HF_HOME"] = args.hf_home
 
-        searcher = searcher_class(args)
+        searcher = searcher_class(reranker, args)
 
         snippet_max_tokens = args.snippet_max_tokens
         k = args.k

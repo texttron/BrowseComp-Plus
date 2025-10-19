@@ -16,15 +16,14 @@ class BaseSearcher(ABC):
         """Add searcher-specific arguments to the argument parser."""
         pass
 
-    @abstractmethod
-    def __init__(self, args):
+    def __init__(self, reranker):
         """Initialize the searcher with parsed arguments."""
-        pass
+        self.reranker = reranker
 
     @abstractmethod
-    def search(self, query: str, k: int = 10) -> List[Dict[str, Any]]:
+    def _retrieve(self, query: str, k: int = 10) -> List[Dict[str, Any]]:
         """
-        Perform search and return results.
+        Perform retrieval and return results.
 
         Args:
             query: Search query string
@@ -34,6 +33,46 @@ class BaseSearcher(ABC):
             List of search results with format: {"docid": str, "score": float, "snippet": str}
         """
         pass
+
+    @abstractmethod
+    def retrieve_batch(
+        self, queries: List[str], qids: List[str], k: int = 10
+    ) -> Dict[str, list[dict[str, Any]]]:
+        """
+        Perform retrieval and return results.
+
+        Args:
+            queries: A list of search query strings
+            qids: A list of search query ids
+            k: Number of results to return for each query
+
+        Returns:
+            A dictionary from query ids to list of search results with format: {"docid": str, "score": float, "snippet": str}
+        """
+        pass
+
+    def search(
+        self, query: str, query_id: str | None = None, k: int = 10
+    ) -> List[Dict[str, Any]]:
+        """
+        Perform search (retrieval with optional reranking) and return results.
+
+        Args:
+            query: Search query string
+            k: Number of results to return
+
+        Returns:
+            List of search results with format: {"docid": str, "score": float, "snippet": str}
+        """
+        first_stage_k = self.reranker.first_stage_k if self.reranker else k
+
+        retrieved_results = self._retrieve(query, first_stage_k)
+        # print(f"retrieved doc ids in base search: {[x['docid'] for x in retrieved_results]}")
+        if not self.reranker:
+            return retrieved_results
+        rerank_results = self.reranker.rerank(query, retrieved_results, query_id, k)
+        # print(f"reranked doc ids in base search: {[x['docid'] for x in rerank_results]}")
+        return rerank_results
 
     @abstractmethod
     def get_document(self, docid: str) -> Optional[Dict[str, Any]]:

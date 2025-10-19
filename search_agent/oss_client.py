@@ -18,11 +18,11 @@ from transformers import AutoTokenizer
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from utils import extract_retrieved_docids_from_result
 
+from searcher.rerankers import RerankerType
 from searcher.searchers import SearcherType
 
 
 class SearchToolHandler:
-
     def __init__(
         self,
         searcher,
@@ -41,7 +41,7 @@ class SearchToolHandler:
 
     def execute_tool(self, tool_name: str, arguments: dict):
         if tool_name == "local_knowledge_base_retrieval":
-            return self._search(arguments["user_query"])
+            return self._search(arguments["user_query"], arguments["query_id"])
         elif tool_name == "get_document":
             return self._get_document(arguments["docid"])
         else:
@@ -91,8 +91,8 @@ class SearchToolHandler:
 
         return tools
 
-    def _search(self, query: str):
-        candidates = self.searcher.search(query, self.k)
+    def _search(self, query: str, query_id: str | None):
+        candidates = self.searcher.search(query, query_id, self.k)
 
         if self.snippet_max_tokens and self.snippet_max_tokens > 0 and self.tokenizer:
             for cand in candidates:
@@ -135,10 +135,10 @@ def run_conversation_with_tools(
     client: openai.OpenAI,
     initial_request: dict,
     tool_handler: SearchToolHandler,
+    query_id: str | None = None,
     max_iterations: int = 100,
     verbose: bool = False,
 ):
-
     tool_usage = {}
 
     messages = initial_request["input"]
@@ -182,6 +182,7 @@ def run_conversation_with_tools(
         for tool_call in function_calls:
             try:
                 arguments = json.loads(tool_call["arguments"])
+                arguments["query_id"] = query_id
                 result = tool_handler.execute_tool(tool_call["name"], arguments)
                 tool_usage[tool_call["name"]] = tool_usage.get(tool_call["name"], 0) + 1
 
@@ -374,7 +375,12 @@ def _process_tsv_dataset(
 
         try:
             messages, tool_usage, status = run_conversation_with_tools(
-                client, initial_request, tool_handler, args.max_iterations, args.verbose
+                client,
+                initial_request,
+                tool_handler,
+                qid,
+                args.max_iterations,
+                args.verbose,
             )
 
             if status == "completed":
@@ -470,6 +476,12 @@ def main():
         help=f"Type of searcher to use: {', '.join(SearcherType.get_choices())}",
     )
     parser.add_argument(
+        "--reranker-type",
+        choices=RerankerType.get_choices(),
+        default=None,
+        help=f"Type of reranker to use: None, {', '.join(SearcherType.get_choices())}",
+    )
+    parser.add_argument(
         "--hf-token",
         type=str,
         help="Hugging Face token for accessing private datasets/models",
@@ -494,6 +506,12 @@ def main():
     )
 
     temp_args, _ = parser.parse_known_args()
+    reranker = None
+    if temp_args.reranker_type:
+        reranker_class = RerankerType.get_reranker_class(temp_args.reranker_type)
+        reranker_class.parse_args(parser)
+        rerank_args, _ = parser.parse_known_args()
+        reranker = reranker_class(rerank_args)
     searcher_class = SearcherType.get_searcher_class(temp_args.searcher_type)
     searcher_class.parse_args(parser)
 
@@ -510,8 +528,7 @@ def main():
         api_key="EMPTY",
     )
 
-    searcher = searcher_class(args)
-
+    searcher = searcher_class(reranker, args)
     tool_handler = SearchToolHandler(
         searcher=searcher,
         snippet_max_tokens=args.snippet_max_tokens,
@@ -549,7 +566,7 @@ def main():
     }
 
     messages, tool_usage, status = run_conversation_with_tools(
-        client, initial_request, tool_handler, args.max_iterations, args.verbose
+        client, initial_request, tool_handler, None, args.max_iterations, args.verbose
     )
 
     _persist_response(
