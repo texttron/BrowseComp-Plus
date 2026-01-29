@@ -150,19 +150,25 @@ def parse_judge_response(judge_response: str) -> dict:
 
 
 # source: https://github.com/hendrycks/outlier-exposure/blob/master/utils/calibration_tools.py
+# NOTE: Fixed bug in original - loop was `range(len(bins) - 1)` which skipped the last bin
 def calib_err(confidence, correct, p="2", beta=100):
     # beta is target bin size
     idxs = np.argsort(confidence)
     confidence = confidence[idxs]
     correct = correct[idxs]
-    bins = [[i * beta, (i + 1) * beta] for i in range(len(confidence) // beta)]
-    bins[-1] = [bins[-1][0], len(confidence)]
+
+    n = len(confidence)
+    if n == 0:
+        return 0
+
+    # Build bins covering all examples
+    bins = [[i, min(i + beta, n)] for i in range(0, n, beta)]
 
     cerr = 0
-    total_examples = len(confidence)
-    for i in range(len(bins) - 1):
-        bin_confidence = confidence[bins[i][0] : bins[i][1]]
-        bin_correct = correct[bins[i][0] : bins[i][1]]
+    total_examples = n
+    for lo, hi in bins:
+        bin_confidence = confidence[lo:hi]
+        bin_correct = correct[lo:hi]
         num_examples_in_bin = len(bin_confidence)
 
         if num_examples_in_bin > 0:
