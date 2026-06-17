@@ -6,6 +6,7 @@ import glob
 import logging
 import os
 import pickle
+from contextlib import nullcontext
 from itertools import chain
 from typing import Any, Dict, List, Optional
 
@@ -83,6 +84,7 @@ class FaissSearcher(BaseSearcher):
         self.tokenizer = None
         self.lookup = None
         self.docid_to_text = None
+        self.device = detect_device()
 
         logger.info("Initializing FAISS searcher...")
 
@@ -176,11 +178,12 @@ class FaissSearcher(BaseSearcher):
             normalize=model_args.normalize,
             lora_name_or_path=model_args.lora_name_or_path,
             cache_dir=model_args.cache_dir,
-            torch_dtype=torch_dtype,
-            attn_implementation=model_args.attn_implementation,
+            dtype=torch_dtype,
+            attn_implementation=get_attn_implementation(self.device) #model_args.attn_implementation,
         )
 
-        self.model = self.model.to("cuda" if torch.cuda.is_available() else "cpu")
+        self.model = self.model.to(self.device)
+
         self.model.eval()
 
         self.tokenizer = AutoTokenizer.from_pretrained(
@@ -260,10 +263,10 @@ class FaissSearcher(BaseSearcher):
             return_tensors="pt",
         )
 
-        device = "cuda" if torch.cuda.is_available() else "cpu"
-        batch_dict = {k: v.to(device) for k, v in batch_dict.items()}
+        batch_dict = {k: v.to(self.device) for k, v in batch_dict.items()}
 
-        with torch.amp.autocast(device):
+
+        with self.get_autocast_ctx():
             with torch.no_grad():
                 q_reps = self.model.encode_query(batch_dict)
                 q_reps = q_reps.cpu().detach().numpy()
@@ -298,6 +301,13 @@ class FaissSearcher(BaseSearcher):
     def search_type(self) -> str:
         return "FAISS"
 
+    def get_autocast_ctx(self):
+        if self.device.type in ["cpu", "cuda"]:
+            return torch.amp.autocast(device_type=self.device.type)
+        else:
+            # MPS: autocast not supported -> use nullcontext
+            return nullcontext()
+
 
 class ReasonIrSearcher(FaissSearcher):
     def _load_model(self) -> None:
@@ -326,10 +336,10 @@ class ReasonIrSearcher(FaissSearcher):
         self.model = AutoModel.from_pretrained(
             model_args.model_name_or_path,
             cache_dir=model_args.cache_dir,
-            torch_dtype=torch_dtype,
+            dtype=torch_dtype,
             trust_remote_code=True,
         )
-        self.model = self.model.to("cuda" if torch.cuda.is_available() else "cpu")
+        self.model = self.model.to(self.device)
         self.model.eval()
 
         logger.info("Model loaded successfully")
@@ -338,9 +348,7 @@ class ReasonIrSearcher(FaissSearcher):
         if not all([self.retriever, self.model, self.lookup]):
             raise RuntimeError("Searcher not properly initialized")
 
-        device = "cuda" if torch.cuda.is_available() else "cpu"
-
-        with torch.amp.autocast(device):
+        with self.get_autocast_ctx():
             with torch.no_grad():
                 q_reps = self.model.encode(
                     [query],
@@ -359,3 +367,33 @@ class ReasonIrSearcher(FaissSearcher):
             )
 
         return results
+
+def detect_device():
+    if torch.cuda.is_available():
+        device = torch.device("cuda")
+        print(f"CUDA available: {torch.cuda.get_device_name(0)}")
+    elif torch.backends.mps.is_available():
+        device = torch.device("mps")
+        print("MPS available (Apple Silicon GPU)")
+    else:
+        device = torch.device("cpu")
+        print("Using CPU only (no GPU backend available)")
+    return device
+
+
+def has_flash_attn():
+    try:
+        import flash_attn
+        return True
+    except ImportError:
+        return False
+
+def get_attn_implementation(device):
+    if device == torch.device("cuda") and has_flash_attn():
+        return "flash_attention_2"
+    elif device == torch.device("mps"):
+        return "sdpa"
+    elif device == torch.device("cpu"):
+        return "eager"
+    raise ValueError("Unknown device {}".format(device))
+

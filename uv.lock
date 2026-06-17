@@ -1,5 +1,5 @@
 version = 1
-revision = 2
+revision = 3
 requires-python = ">=3.10"
 resolution-markers = [
     "python_full_version >= '3.13' and sys_platform == 'darwin'",
@@ -423,6 +423,62 @@ sdist = { url = "https://files.pythonhosted.org/packages/21/28/9b3f50ce0e0485151
 wheels = [
     { url = "https://files.pythonhosted.org/packages/10/cb/f2ad4230dc2eb1a74edf38f1a38b9b52277f75bef262d8908e60d957e13c/blinker-1.9.0-py3-none-any.whl", hash = "sha256:ba0efaa9080b619ff2f3459d1d500c57bddea4a6b424b60a91141db6fd2f08bc", size = 8458, upload-time = "2024-11-08T17:25:46.184Z" },
 ]
+
+[[package]]
+name = "browsecomp-plus"
+version = "0.1.0"
+source = { editable = "." }
+dependencies = [
+    { name = "accelerate" },
+    { name = "anthropic" },
+    { name = "datasets" },
+    { name = "faiss-cpu" },
+    { name = "fastmcp" },
+    { name = "google-genai" },
+    { name = "openai" },
+    { name = "peft" },
+    { name = "pyngrok" },
+    { name = "pyserini" },
+    { name = "python-dotenv" },
+    { name = "qwen-agent", extra = ["gui", "mcp", "rag"] },
+    { name = "qwen-omni-utils" },
+    { name = "rich" },
+    { name = "tevatron" },
+    { name = "torchvision" },
+    { name = "tqdm" },
+    { name = "transformers" },
+]
+
+[package.optional-dependencies]
+gpu = [
+    { name = "deepspeed" },
+    { name = "vllm" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "accelerate", specifier = ">=1.9.0" },
+    { name = "anthropic", specifier = ">=0.58.2" },
+    { name = "datasets", specifier = ">=4.0.0" },
+    { name = "deepspeed", marker = "extra == 'gpu'", specifier = ">=0.17.2" },
+    { name = "faiss-cpu", specifier = ">=1.11.0.post1" },
+    { name = "fastmcp", specifier = "==2.9.2" },
+    { name = "google-genai", specifier = ">=1.27.0" },
+    { name = "openai", specifier = ">=1.97.0" },
+    { name = "peft", specifier = ">=0.16.0" },
+    { name = "pyngrok", specifier = ">=7.2.12" },
+    { name = "pyserini", specifier = ">=1.2.0" },
+    { name = "python-dotenv", specifier = ">=1.1.1" },
+    { name = "qwen-agent", extras = ["gui", "mcp", "rag"], specifier = "==0.0.27" },
+    { name = "qwen-omni-utils", specifier = "==0.0.8" },
+    { name = "rich", specifier = ">=14.0.0" },
+    { name = "tevatron", git = "https://github.com/texttron/tevatron.git?rev=main" },
+    { name = "torchvision" },
+    { name = "tqdm", specifier = ">=4.67.1" },
+    { name = "transformers", specifier = ">=4.53.2,<5.0" },
+    { name = "vllm", marker = "extra == 'gpu'", specifier = ">=0.9.0" },
+]
+provides-extras = ["gpu"]
 
 [[package]]
 name = "cachetools"
@@ -901,7 +957,6 @@ dependencies = [
     { name = "numpy" },
     { name = "packaging" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/5c/f4/7c2136f4660ca504266cc08b38df2aa1db14fea93393b82e099ff34d7290/faiss_cpu-1.11.0.post1.tar.gz", hash = "sha256:06b1ea9ddec9e4d9a41c8ef7478d493b08d770e9a89475056e963081eed757d1", size = 70543, upload-time = "2025-07-15T09:15:02.127Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/c5/29/b5c3fb0815449a5c7f1dd507da68ab30ab7a2a497178d5b4e365799f7670/faiss_cpu-1.11.0.post1-cp310-cp310-macosx_13_0_x86_64.whl", hash = "sha256:e079d44ea22919f6477fea553b05854c68838ab553e1c6b1237437a8becdf89d", size = 7886451, upload-time = "2025-07-15T09:13:32.159Z" },
     { url = "https://files.pythonhosted.org/packages/b9/85/e526467ac75ef915b1444d5a1e9ef7af54d73242f923e664fffc2db65d54/faiss_cpu-1.11.0.post1-cp310-cp310-macosx_14_0_arm64.whl", hash = "sha256:4ded0c91cb67f462ae00a4d339718ea2fbb23eedbf260c3a07de77c32c23205a", size = 3308139, upload-time = "2025-07-15T09:13:34.033Z" },
@@ -1324,57 +1379,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/52/36/bbdede67400277bef33d3ec0e6a31750da972c469f75966b4930c753218f/groovy-0.1.2.tar.gz", hash = "sha256:25c1dc09b3f9d7e292458aa762c6beb96ea037071bf5e917fc81fb78d2231083", size = 17325, upload-time = "2025-02-28T20:24:56.068Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/28/27/3d6dcadc8a3214d8522c1e7f6a19554e33659be44546d44a2f7572ac7d2a/groovy-0.1.2-py3-none-any.whl", hash = "sha256:7f7975bab18c729a257a8b1ae9dcd70b7cafb1720481beae47719af57c35fa64", size = 14090, upload-time = "2025-02-28T20:24:55.152Z" },
-]
-
-[[package]]
-name = "browsecomp-plus"
-version = "0.1.0"
-source = { virtual = "." }
-dependencies = [
-    { name = "accelerate" },
-    { name = "anthropic" },
-    { name = "datasets" },
-    { name = "deepspeed" },
-    { name = "faiss-cpu" },
-    { name = "fastmcp" },
-    { name = "google-genai" },
-    { name = "openai" },
-    { name = "peft" },
-    { name = "pyngrok" },
-    { name = "pyserini" },
-    { name = "python-dotenv" },
-    { name = "qwen-agent", extra = ["gui", "mcp", "rag"] },
-    { name = "qwen-omni-utils" },
-    { name = "rich" },
-    { name = "tevatron" },
-    { name = "torchvision" },
-    { name = "tqdm" },
-    { name = "transformers" },
-    { name = "vllm" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "accelerate", specifier = ">=1.9.0" },
-    { name = "anthropic", specifier = ">=0.58.2" },
-    { name = "datasets", specifier = ">=4.0.0" },
-    { name = "deepspeed", specifier = ">=0.17.2" },
-    { name = "faiss-cpu", specifier = ">=1.11.0.post1" },
-    { name = "fastmcp", specifier = "==2.9.2" },
-    { name = "google-genai", specifier = ">=1.27.0" },
-    { name = "openai", specifier = ">=1.97.0" },
-    { name = "peft", specifier = ">=0.16.0" },
-    { name = "pyngrok", specifier = ">=7.2.12" },
-    { name = "pyserini", specifier = ">=1.2.0" },
-    { name = "python-dotenv", specifier = ">=1.1.1" },
-    { name = "qwen-agent", extras = ["gui", "mcp", "rag"], specifier = "==0.0.27" },
-    { name = "qwen-omni-utils", specifier = "==0.0.8" },
-    { name = "rich", specifier = ">=14.0.0" },
-    { name = "tevatron", git = "https://github.com/texttron/tevatron.git?rev=main" },
-    { name = "torchvision" },
-    { name = "tqdm", specifier = ">=4.67.1" },
-    { name = "transformers", specifier = ">=4.53.2" },
-    { name = "vllm", specifier = ">=0.9.0" },
 ]
 
 [[package]]

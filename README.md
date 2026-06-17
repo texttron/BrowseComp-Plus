@@ -47,10 +47,17 @@ you can find more information about its installation [here](https://docs.astral.
 Then run:
 
 ```bash
+# Base installation (works on all platforms)
 uv sync
+source .venv/bin/activate
+
+# With GPU extras (required for local evaluation)
+uv sync --extra gpu
 source .venv/bin/activate
 uv pip install --no-build-isolation flash-attn # Needed for faiss
 ```
+
+> **Note:** The base installation supports all search agents and retrieval functionality. The `--extra gpu` option adds vllm and deepspeed, which are needed for running local GPU-accelerated evaluation with `scripts_evaluation/evaluate_run.py`.
 
 Additionally, this repo depends on java 21. One way to install it is through conda:
 
@@ -114,7 +121,7 @@ python scripts_evaluation/evaluate_run.py --input_dir runs/my_model
 ```
 where you may pass in `--tensor_parallel_size {num_gpus}` to adjust the number of GPUs you have available.
 
-> Note that the script above evalutes using Qwen3-32B as a judge. For more details on evaluation, please refer to [docs/llm_as_judge.md](docs/llm_as_judge.md).
+> **Note:** The script above evaluates using Qwen3-32B as a judge and requires `uv sync --extra gpu` installation with GPU access. For alternative evaluation methods including legacy GPT-4.1 evaluation (no GPU required), please refer to [docs/llm_as_judge.md](docs/llm_as_judge.md).
 
 ### Submitting to the Leaderboard
 
@@ -194,14 +201,18 @@ where you can find the decrypted trajectory data in `data/decrypted_run_files/`.
 ## 📚 Docs
 
 To reproduce results from BrowseComp-Plus, you can refer to the following docs for running the various search agents:
+
+### API-Based Agents (Base Installation, No GPU Required)
 - [OpenAI API](docs/openai.md)
 - [Gemini API](docs/gemini.md)
 - [Anthropic API](docs/anthropic.md)
 - [GLM API](docs/glm.md)
-- [OSS](docs/oss.md)
-- [Qwen-3](docs/qwen.md)
-- [Search-R1](docs/search-r1.md)
-- [Tongyi-DeepResearch-30B-A3B](docs/tongyi.md)
+
+### Self-Hosted Model Agents (Requires GPU)
+- [OSS](docs/oss.md) - Requires GPU for vLLM server
+- [Qwen-3](docs/qwen.md) - Requires GPU for model serving
+- [Search-R1](docs/search-r1.md) - Requires GPU for model serving
+- [Tongyi-DeepResearch-30B-A3B](docs/tongyi.md) - Requires GPU for model serving
 
 As an alternative to deploying the retrieval server yourself locally, you can also use a [pre-deployed MCP server from NetMind](docs/netmind_mcp.md).
 

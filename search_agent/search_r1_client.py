@@ -41,6 +41,25 @@ args = parser.parse_args()
 
 os.makedirs(args.output_dir, exist_ok=True)
 
+def detect_device():
+    if torch.cuda.is_available():
+        print(f"CUDA available: {torch.cuda.get_device_name(0)}")
+        return torch.device("cuda")
+    elif torch.backends.mps.is_available():
+        print("MPS available (Apple Silicon GPU)")
+        return torch.device("mps")
+    else:
+        print("Using CPU only (no GPU backend available)")
+        return torch.device("cpu")
+
+def get_model_dtype_and_device():
+    if torch.cuda.is_available():
+        return torch.bfloat16, "auto"
+    elif torch.backends.mps.is_available():
+        return torch.float16, None  # Don't use device_map with MPS
+    else:
+        return torch.float32, None
+
 if args.query.endswith(".tsv"):
     print(f"Loading questions from TSV file: {args.query}...")
     questions_to_process = pd.read_csv(
@@ -53,7 +72,7 @@ else:
     print("Processing 1 question")
 
 model_id = args.model
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = detect_device()
 curr_eos = [151645, 151643]  # for Qwen2.5 series models
 curr_search_template = (
     "\n\n{output_text}<information>{search_results}</information>\n\n"
@@ -61,8 +80,9 @@ curr_search_template = (
 
 print("Loading model and tokenizer...")
 tokenizer = transformers.AutoTokenizer.from_pretrained(model_id)
+dtype, device_map = get_model_dtype_and_device()
 model = transformers.AutoModelForCausalLM.from_pretrained(
-    model_id, torch_dtype=torch.bfloat16, device_map="auto"
+    model_id, dtype=dtype, device_map=device_map
 )
 
 

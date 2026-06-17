@@ -1,3 +1,7 @@
+[build-system]
+requires = ["setuptools>=77.0.0"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "browsecomp-plus"
 version = "0.1.0"
@@ -7,7 +11,6 @@ dependencies = [
     "accelerate>=1.9.0",
     "anthropic>=0.58.2",
     "datasets>=4.0.0",
-    "deepspeed>=0.17.2",
     "faiss-cpu>=1.11.0.post1",
     "fastmcp==2.9.2",
     "google-genai>=1.27.0",
@@ -22,9 +25,25 @@ dependencies = [
     "tevatron",
     "torchvision",
     "tqdm>=4.67.1",
-    "transformers>=4.53.2",
-    "vllm>=0.9.0",
+    "transformers>=4.53.2,<5.0",
+    "tevatron @ git+https://github.com/texttron/tevatron.git@main",
+]
+
+[project.optional-dependencies]
+gpu = [
+  "deepspeed>=0.17.2",
+  "vllm>=0.9.0",
 ]
 
 [tool.uv.sources]
 tevatron = { git = "https://github.com/texttron/tevatron.git", rev = "main" }
+
+[tool.setuptools]
+
+script-files = [
+  "scripts_build_index/download_indexes.sh",
+  "scripts_build_index/download_run_files.sh",
+]
+
+[tool.setuptools.packages.find]
+include = ["searcher*", "search_agent*", "scripts_evaluation*", "scripts_build_index*"]

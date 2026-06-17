@@ -5,25 +5,18 @@ Searchers package for different search implementations.
 from enum import Enum
 
 from .base import BaseSearcher
-from .bm25_searcher import BM25Searcher
-from .custom_searcher import CustomSearcher
-from .faiss_searcher import FaissSearcher, ReasonIrSearcher
 
 
 class SearcherType(Enum):
     """Enum for managing available searcher types and their CLI mappings."""
 
-    BM25 = ("bm25", BM25Searcher)
-    FAISS = ("faiss", FaissSearcher)
-    REASONIR = ("reasonir", ReasonIrSearcher)
-    CUSTOM = (
-        "custom",
-        CustomSearcher,
-    )  # Your custom searcher class, yet to be implemented
+    BM25 = "bm25"
+    FAISS = "faiss"
+    REASONIR = "reasonir"
+    CUSTOM = "custom"
 
-    def __init__(self, cli_name, searcher_class):
+    def __init__(self, cli_name):
         self.cli_name = cli_name
-        self.searcher_class = searcher_class
 
     @classmethod
     def get_choices(cls):
@@ -32,10 +25,19 @@ class SearcherType(Enum):
 
     @classmethod
     def get_searcher_class(cls, cli_name):
-        """Get searcher class by CLI name."""
-        for searcher_type in cls:
-            if searcher_type.cli_name == cli_name:
-                return searcher_type.searcher_class
+        """Get searcher class by CLI name, importing only when needed."""
+        if cli_name == cls.BM25.cli_name:
+            from .bm25_searcher import BM25Searcher
+            return BM25Searcher
+        elif cli_name == cls.FAISS.cli_name:
+            from .faiss_searcher import FaissSearcher
+            return FaissSearcher
+        elif cli_name == cls.REASONIR.cli_name:
+            from .faiss_searcher import ReasonIrSearcher
+            return ReasonIrSearcher
+        elif cli_name == cls.CUSTOM.cli_name:
+            from .custom_searcher import CustomSearcher
+            return CustomSearcher
         raise ValueError(f"Unknown searcher type: {cli_name}")
 
 
